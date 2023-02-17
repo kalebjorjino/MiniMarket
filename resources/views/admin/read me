@@ -1,0 +1,8 @@
+views, components at lahat ng para sa admin side
+
+create sub folders per tab
+
+-   users
+-   products
+-   orders
+-   etc
