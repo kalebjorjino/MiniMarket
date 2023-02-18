@@ -6,3 +6,5 @@ create sub folders per tab
 -   products
 -   orders
 -   etc
+
+about.blade.php is a template page
