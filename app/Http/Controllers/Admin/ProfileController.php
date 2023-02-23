@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
