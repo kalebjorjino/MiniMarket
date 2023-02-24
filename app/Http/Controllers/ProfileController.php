@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\AdminProfileUpdateRequest;
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
     public function show()
     {
-        return view('admin.profile');
+        return view('customer.account.profile');
     }
 
-    public function update(AdminProfileUpdateRequest $request)
+    public function update(ProfileUpdateRequest $request)
     {
         if ($request->password) {
-            auth()->guard('admin')->user()->update(['password' => Hash::make($request->password)]);
+            auth()->user()->update(['password' => Hash::make($request->password)]);
         }
 
-        auth()->guard('admin')->user()->update([
+        auth()->user()->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
