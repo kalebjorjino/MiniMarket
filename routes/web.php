@@ -40,13 +40,10 @@ Auth::routes();
 
 // customer routes
 Route::middleware(['auth','customer'])->group(function () {
-    // TODO
-    // create customer middleware
-    // php artisan make:middleware EnsureUserIsCustomer
+  
 });
 
 // admin routes
-
 Route::prefix('admin')->group(function () {
 
     Route::get('/login', [AdminAuthController::class, 'index'])->name('adminLogin');
@@ -55,29 +52,31 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware('admin.auth')->group(function () {
 
-        Route::get('/', function () {
-            return view('admin.layouts.app');
-        });
-
         // DASHBOARD
+        Route::get('/', [DashboardController::class, 'index'])->name('adminDashboard');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
-        // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
 
+
+        // PROFILE
+        Route::get('profile', [AdminProfile::class, 'show'])->name('profile.show');
+        Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
 
         // ADMINS
-        Route::get('admins', [AdminController::class, 'index'])->name('admin.index');
-
+        Route::resource('admins', AdminController::class);
 
         // USERS
         Route::get('users', [UserController::class, 'index'])->name('users.index');
 
 
 
-        Route::view('about', 'about')->name('about');
+       
 
-     
-        Route::get('profile', [AdminProfile::class, 'show'])->name('profile.show');
-        Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
+
+        Route::view('about', 'admin.about')->name('about');
+
+
+        // REF
+        // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
     });
 
 });

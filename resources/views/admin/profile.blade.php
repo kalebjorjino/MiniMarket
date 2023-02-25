@@ -69,7 +69,7 @@
                                 <input type="password"
                                     @error('password') class="form-control is-invalid"
                                        @enderror
-                                    name="password" id="password" placeholder="{{ __('New password') }}" required>
+                                    name="password" id="password" placeholder="{{ __('New password') }}">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
                                     @error('password') class="form-control is-invalid"
                                        @enderror
                                     name="password_confirmation" id="password_confirmation"
-                                    placeholder="{{ __('New password confirmation') }}" required>
+                                    placeholder="{{ __('New password confirmation') }}">
                             </div>
                         </div>
                         <!-- end col -->

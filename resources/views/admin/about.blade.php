@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
     <!-- ========== title-wrapper start ========== -->
@@ -24,4 +24,6 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
 @endsection

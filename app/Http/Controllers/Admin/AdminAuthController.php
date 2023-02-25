@@ -10,7 +10,7 @@ class AdminAuthController extends Controller
 {
     public function index() {
         if(Auth::guard('admin')->check())
-            return redirect('adminDashboard');
+            return redirect()->route('adminDashboard');
         return view('admin.auth.login');
     }
 
@@ -27,7 +27,7 @@ class AdminAuthController extends Controller
         {
             // $user = auth()->guard('admin')->user();
             // if($user->is_admin == 1){
-            return redirect()->route('adminDashboard')->with('success', 'You are Logged in successfully.');
+            return redirect()->route('adminDashboard')->with('success', 'Succesfully logged in');
         } else {
             return back()->with('error', 'Invalid email or password.');
         }

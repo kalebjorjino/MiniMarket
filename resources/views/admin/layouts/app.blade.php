@@ -16,7 +16,7 @@
     <!-- ======== sidebar-nav start =========== -->
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
-            <a href="{{ route('home') }}">
+            <a href="{{ route('adminDashboard') }}">
                 {{-- <img src="{{ asset('images/logo/logo.svg') }}" alt="logo" /> --}}
                 SAM-J MART
             </a>
@@ -95,8 +95,12 @@
     <!-- ======== main-wrapper end =========== -->
 
     <!-- ========= All Javascript files linkup ======== -->
-    @vite('resources/js/app.js')
+    {{-- @vite('resources/js/app.js') --}}
     <script src="{{ asset('js/main.js') }}"></script>
+    @vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    @yield('script')
 </body>
 
 </html>
