@@ -62,7 +62,12 @@ Route::prefix('admin')->group(function () {
         Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
 
         // ADMINS
-        Route::resource('admins', AdminController::class);
+        // Route::resource('admins', AdminController::class, [
+        //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
+        // ]);
+        Route::resource('admins', AdminController::class, [
+            'except' => ['create', 'show']
+        ]);
 
         // USERS
         Route::get('users', [UserController::class, 'index'])->name('users.index');

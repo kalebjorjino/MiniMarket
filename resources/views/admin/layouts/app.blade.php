@@ -17,8 +17,8 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="{{ route('adminDashboard') }}">
-                {{-- <img src="{{ asset('images/logo/logo.svg') }}" alt="logo" /> --}}
-                SAM-J MART
+                <img src="{{ asset('images/logo/samj-logo.png') }}" height="65px"alt="logo" />
+
             </a>
         </div>
         <nav class="sidebar-nav">

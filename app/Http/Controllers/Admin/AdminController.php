@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AdminCreateRequest;
+use App\Http\Requests\AdminsUpdateRequest;
 
 class AdminController extends Controller
 {
@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function create()
     {
-        // modal or a new view?
+        // view
     }
 
     public function store(AdminCreateRequest $request)
@@ -31,8 +31,7 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-           
-        return redirect()->route('admins.index')->with('success', 'User has been created succesfully');
+        return redirect()->route('admins.index')->with('success', 'User created succesfully');
     }
 
     // Show a record
@@ -45,8 +44,22 @@ class AdminController extends Controller
     // Edit a record
     public function edit($id) 
     {
-        $record = Admin::findOrFail($id);
-        return view('admins.edit', compact('record'));
+        $record = Admin::find($id);
+        // return view('admins.edit', compact('record'));
+        return response()->json($record);
+    }
+
+    // Update a record
+    public function update(AdminsUpdateRequest $request, $id)
+    {
+        $user = Admin::find($id);
+        $user->name = $request->input('e_name');
+        $user->email = $request->input('e_email');
+        if ($request->input('e_password') != NULL) {
+             $user->password =  Hash::make($request->e_password);
+        }
+        $user->save();
+        return redirect()->route('admins.index')->with('success', 'User updated successfully');
     }
 
     // Delete a record 

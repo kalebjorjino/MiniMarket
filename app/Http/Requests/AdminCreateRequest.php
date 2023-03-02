@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Validation\Rule;
+use App\Rules\alpha_spaces;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminCreateRequest extends FormRequest
@@ -23,8 +23,8 @@ class AdminCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'string', 'max:255', Rule::unique('admins')],
+            'name' => ['required', 'string', 'max:255', new alpha_spaces],
+            'email' => ['required', 'email', 'string', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'confirmed'],
         ];
     }

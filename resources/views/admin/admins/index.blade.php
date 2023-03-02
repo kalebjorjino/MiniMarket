@@ -10,8 +10,6 @@
                     <button type="button" class="main-btn primary-btn btn-hover btn-sm" data-bs-target="#createAdminModal"
                         data-bs-toggle="modal">
                         <i class="lni lni-plus mr-5"></i> New admin</button>
-                    {{--  <a href="#" class="main-btn primary-btn btn-hover btn-sm">
-                        <i class="lni lni-plus mr-5"></i> New admin</a> --}}
                 </div>
             </div>
             <!-- end col -->
@@ -35,9 +33,6 @@
     </div>
     @include('admin.admins.create-admin')
 
-    {{-- <button type="button" class="btn btn-default btn-sm" id="editAdmin"
-                                                    data-id="1" data-target="#editAdminModal" data-toggle="modal"
-                                                    style="background-color:#DDAB54; border-color:#B48845; color: white;">Edit</button> --}}
     <!-- ========== title-wrapper end ========== -->
 
     <div class="card-styles">
@@ -81,19 +76,15 @@
                                         <p>{{ $a->email }}</p>
                                     </td>
                                     <td>
-                                        <button class="edit-btn">
+                                        <button class="edit-btn" data-bs-target="#editAdminModal" data-bs-toggle="modal"
+                                            data-id="{{ $a->id }}">
                                             <i class="lni lni-pencil"></i>
                                         </button>
                                         <button class="destroy delete-btn ml-8" data-id="{{ $a->id }}">
                                             <i class="lni
                                             lni-trash-can"></i>
                                         </button>
-                                        {{-- <button class="main-btn btn-sm primary-btn">
-                                            Edit
-                                        </button>
-                                        <button class="main-btn btn-sm danger-btn delete-btn ml-10">
-                                            Delete
-                                        </button> --}}
+
                                     <td>
                                 </tr>
                             @endforeach
@@ -109,10 +100,12 @@
             </div>
         </div>
     </div>
+    @include('admin.admins.update-admin')
 @endsection
 
 @section('script')
-    @if (count($errors) > 0)
+    // SHOW MODAL IF ERROR
+    @if ($errors->has('name') || $errors->has('email') || $errors->has('password'))
         <script>
             $(document).ready(function() {
                 $('#createAdminModal').modal('show');
@@ -120,8 +113,34 @@
         </script>
     @endif
 
+    @if ($errors->has('e_name') || $errors->has('e_email') || $errors->has('e_pass'))
+        <script>
+            $(document).ready(function() {
+                $('#editAdminModal').modal('show');
+            });
+        </script>
+    @endif
 
     <script>
+        // EDIT
+        $('#editAdminModal').on('show.bs.modal', function(e) {
+            var button = $(e.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var url = "{{ route('admins.edit', ':id') }}".replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#e_name').val(data.name);
+                    $('#e_email').val(data.email);
+                    $('#edit-form').attr('action', "{{ route('admins.update', ':id') }}".replace(':id',
+                        id));
+                }
+            });
+        })
+
         // DELETE  
         var url = window.location.href;
 
