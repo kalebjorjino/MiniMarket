@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\StorefrontController;
 use App\Http\Controllers\Admin\AdminController;
@@ -38,7 +39,7 @@ Route::view('/terms-conditions', 'storefront.terms');
 Route::view('/help', 'storefront.help');
 
 
-Route::controller(ProductsController::class)->prefix('products')->group(function () {
+Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show all products
     // show a product 
 });
@@ -69,7 +70,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('adminDashboard');
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('adminDashboard');
 
-
         // PROFILE
         Route::get('profile', [AdminProfile::class, 'show'])->name('profile.show');
         Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
@@ -82,10 +82,25 @@ Route::prefix('admin')->group(function () {
             'except' => ['create', 'show']
         ]);
 
-        // USERS
-        Route::get('users', [UserController::class, 'index'])->name('users.index');
+        // USERS / CUSTOMERS
+        Route::resource('users', UserController::class, [
+            'except' => ['create', 'show']
+        ]);
 
+        // ORDERS
+        Route::resource('orders', OrderController::class, [
+            'except' => ['create', 'show']
+        ]);
 
+        // PRODUCTS
+        Route::resource('products', ProductController::class, [
+            'except' => ['create', 'show']
+        ]);
+
+        // PAYMENTS
+        Route::resource('payments', PaymentController::class, [
+            'except' => ['create', 'show']
+        ]);
 
        
 

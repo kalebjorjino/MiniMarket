@@ -55,6 +55,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    <h6>#</h6>
+                                </th>
+                                <th>
                                     <h6>Name</h6>
                                 </th>
                                 <th>
@@ -70,6 +73,9 @@
                             @foreach ($admins as $a)
                                 <tr>
                                     <td>
+                                        <p>{{ $a->id }}</p>
+                                    </td>
+                                    <td>
                                         <p>{{ $a->name }}</p>
                                     </td>
                                     <td>
@@ -84,7 +90,6 @@
                                             <i class="lni
                                             lni-trash-can"></i>
                                         </button>
-
                                     <td>
                                 </tr>
                             @endforeach

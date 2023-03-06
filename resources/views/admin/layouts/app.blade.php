@@ -9,6 +9,13 @@
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.5/css/buttons.bootstrap5.min.css"> --}}
+
+
+    <link
+        href="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.3/b-2.3.5/b-html5-2.3.5/b-print-2.3.5/r-2.4.0/datatables.min.css" />
     @vite('resources/sass/app.scss')
 </head>
 
@@ -38,8 +45,8 @@
                         <div class="header-left d-flex align-items-center">
                             <div class="menu-toggle-btn mr-20">
                                 <button id="menu-toggle" class="main-btn primary-btn btn-hover">
-                                    <i class="lni lni-chevron-left"></i>
-                                    {{-- <i class="lni lni-chevron-left me-2"></i> {{ __('Menu') }} --}}
+                                    {{-- <i class="lni lni-chevron-left"></i> --}}
+                                    <i class="lni lni-chevron-left me-2"></i> {{ __('Menu') }}
                                 </button>
                             </div>
                         </div>
@@ -55,7 +62,7 @@
                                             <h6>{{ Auth::guard('admin')->user()->name }}</h6>
                                         </div>
                                     </div>
-                                    <i class="lni lni-chevron-down"></i>
+                                    <i class="lni lni-chevron-down ml-10"></i>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
@@ -97,6 +104,14 @@
     <script src="{{ asset('js/main.js') }}"></script>
     @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+    <!-- ========= DataTables ======== -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script
+        src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.3/b-2.3.5/b-html5-2.3.5/b-print-2.3.5/r-2.4.0/datatables.min.js">
+    </script>
+
 
     @yield('script')
 </body>
