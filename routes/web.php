@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\StorefrontController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,17 @@ Route::get('/', function () {
 
 
 // public routes 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::controller(StorefrontController::class)->group(function(){
+    Route::get('/', 'home');
+    Route::get('/contact-us', 'contact')->name('contact.show');
+    Route::post('contact-us', 'contactSend')->name('contact.send');
+});
+
+Route::view('/about', 'storefront.about');
+Route::view('/privacy-policy', 'storefront.privacy');
+Route::view('/terms-conditions', 'storefront.terms');
+Route::view('/help', 'storefront.help');
+
 
 Route::controller(ProductsController::class)->prefix('products')->group(function () {
     // show all products
@@ -34,16 +45,18 @@ Route::controller(ProductsController::class)->prefix('products')->group(function
 
 // TODO cart + checkout routing
 
+
 Auth::routes();
 
+// ============================== customer routes ===============================
+// USER DASHBOARD
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-
-// customer routes
 Route::middleware(['auth','customer'])->group(function () {
   
 });
 
-// admin routes
+// ================================ admin routes ================================
 Route::prefix('admin')->group(function () {
 
     Route::get('/login', [AdminAuthController::class, 'index'])->name('adminLogin');

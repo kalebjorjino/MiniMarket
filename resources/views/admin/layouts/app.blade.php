@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'SAM-J K-MART') }}</title>
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />
@@ -44,8 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7
-                                        col-md-7 col-6">
+                    <div class="col-lg-7 col-md-7 col-6">
                         <div class="header-right">
                             <!-- profile start -->
                             <div class="profile-box ml-15">
@@ -95,7 +94,6 @@
     <!-- ======== main-wrapper end =========== -->
 
     <!-- ========= All Javascript files linkup ======== -->
-    {{-- @vite('resources/js/app.js') --}}
     <script src="{{ asset('js/main.js') }}"></script>
     @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
