@@ -34,6 +34,7 @@ Route::controller(StorefrontController::class)->group(function(){
 });
 
 Route::view('/login', 'auth.login');
+Route::view('/register', 'auth.register');
 
 Route::view('/about', 'storefront.about');
 Route::view('/privacy-policy', 'storefront.privacy');
