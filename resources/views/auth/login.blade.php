@@ -1,31 +1,19 @@
 @extends('admin.layouts.guest')
 
 @section('content')
-    <div class="col-lg-6">
-        <div class="auth-cover-wrapper bg-primary-100">
-            <div class="auth-cover">
-                <div class="title text-center">
-                    <h1 class="text-primary mb-10">{{ __('Login') }}</h1>
+<div style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="mx-auto" style="width: 600px;">
+        <div class="signin-wrapper" style="background-color: transparent;">
+            <div class="form-wrapper" style="margin:auto;">
+                <div class="logo" style="margin:auto;">
+                    <img src="{{ asset('images/logo/samj-logo.png') }}" alt="SAMJ Logo" style="width:400px; display: block; margin-left: auto; margin-right: auto;">
                 </div>
-                <div class="cover-image">
-                    <img src="{{ asset('images/auth/signin-image.svg') }}" alt="">
-                </div>
-                <div class="shape-image">
-                    <img src="{{ asset('images/auth/shape.svg') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end col -->
-    <div class="col-lg-6">
-        <div class="signin-wrapper">
-            <div class="form-wrapper">
-                <h6 class="mb-15">{{ __('Login') }}</h6>
+                <h6 class="mb-15" style="display: block; font: 900 3em Lato; text-align:center;">{{ __('ANNYEONGHASEYO!') }}</h6>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
 
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
                             <div class="input-style-1">
                                 <label for="email">{{ __('Email') }}</label>
                                 <input @error('email') class="form-control is-invalid" @enderror type="email"
@@ -39,7 +27,7 @@
                             </div>
                         </div>
                         <!-- end col -->
-                        <div class="col-12">
+                        <div class="col-12" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
                             <div class="input-style-1">
                                 <label for="password">{{ __('Password') }}</label>
                                 <input type="password" @error('password') class="form-control is-invalid" @enderror
@@ -53,29 +41,29 @@
                             </div>
                         </div>
                         <!-- end col -->
-                        <div class="col-xxl-6 col-lg-12 col-md-6">
+                        <div class="col-xxl-6 col-lg-12 col-md-6" style="width: 400px; display: flex; margin-left: auto; margin-right: auto; display: flex;justify-content:space-between;">
                             <div class="form-check checkbox-style mb-30">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     value="" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}</label>
+                                    @if (Route::has('password.request'))
+                                        <a href="{{ route('password.request') }}" style="text-decoration: underline; text-align: right;">{{ __('Forgot Your Password?') }}</a>
+                                    @endif
                             </div>
+                            
                         </div>
                         <!-- end col -->
-                        @if (Route::has('password.request'))
-                            <div class="col-xxl-6 col-lg-12 col-md-6">
-                                <div class="text-start text-md-end text-lg-start text-xxl-end mb-30">
-                                    <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
-                                </div>
-                            </div>
-                        @endif
-                        <!-- end col -->
-                        <div class="col-12">
+                        
+                        <div class="col-12" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
                             <div class="button-group d-flex justify-content-center flex-wrap">
-                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center">
+                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center" style="padding: 10px; font-size:1.3em; background-color: #2d32cd;">
                                     {{ __('Login') }}
                                 </button>
                             </div>
+                            <div class="switch-login" style="text-align: center; padding: 15px;">
+                            New customer? <a href="/register" class="or-login" style="color: #cc2e3a; text-decoration:underline; ">Sign up here</a>
+                        </div>
                         </div>
                     </div>
                     <!-- end row -->
@@ -83,5 +71,6 @@
             </div>
         </div>
     </div>
+</div>
     <!-- end col -->
 @endsection

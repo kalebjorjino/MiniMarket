@@ -33,6 +33,8 @@ Route::controller(StorefrontController::class)->group(function(){
     Route::post('contact-us', 'contactSend')->name('contact.send');
 });
 
+Route::view('/login', 'auth.login');
+
 Route::view('/about', 'storefront.about');
 Route::view('/privacy-policy', 'storefront.privacy');
 Route::view('/terms-conditions', 'storefront.terms');
