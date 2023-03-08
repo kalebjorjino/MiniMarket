@@ -24,8 +24,7 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="{{ route('adminDashboard') }}">
-                <img src="{{ asset('images/logo/samj-logo.png') }}" height="65px"alt="logo" />
-
+                <img src="{{ asset('images/logo/samj-logo.png') }}" height="85px"alt="logo" />
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -111,6 +110,7 @@
     <script
         src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.3/b-2.3.5/b-html5-2.3.5/b-print-2.3.5/r-2.4.0/datatables.min.js">
     </script>
+
 
 
     @yield('script')

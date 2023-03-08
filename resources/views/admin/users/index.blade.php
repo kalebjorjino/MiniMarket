@@ -5,7 +5,7 @@
     <div class="title-wrapper pt-30">
         <div class="row align-items-center">
             <div class="col-md-6">
-                <div class="title  d-flex align-items-center flex-wrap mb-30">
+                <div class="title d-flex align-items-center flex-wrap mb-30">
                     <h2 class="mr-40">{{ __('Customers') }}</h2>
                     <button type="button" class="main-btn primary-btn btn-hover btn-sm" data-bs-target="#createModal"
                         data-bs-toggle="modal">
@@ -71,7 +71,7 @@
                                     <h6>Created</h6>
                                 </th>
                                 <th data-orderable="false">
-                                    <h6>Actions</h6>
+                                    <h6>Action</h6>
                                 </th>
                             </tr>
                             <!-- end table row-->

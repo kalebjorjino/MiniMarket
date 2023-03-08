@@ -6,6 +6,10 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\StorefrontController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ExpenseController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfile;
@@ -21,14 +25,10 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 
 // public routes 
 Route::controller(StorefrontController::class)->group(function(){
-    Route::get('/', 'home');
+    Route::get('/', 'index'); // home
     Route::get('/contact-us', 'contact')->name('contact.show');
     Route::post('contact-us', 'contactSend')->name('contact.send');
 });
@@ -97,8 +97,18 @@ Route::prefix('admin')->group(function () {
             'except' => ['create', 'show']
         ]);
 
-        // PAYMENTS
-        Route::resource('payments', PaymentController::class, [
+        // CATEGORIES
+        Route::resource('categories', CategoryController::class, [
+            'except' => ['create', 'show']
+        ]);
+
+        // EXPENSES
+        Route::resource('expenses', ExpenseController::class, [
+            'except' => ['create', 'show']
+        ]);
+
+        // REPORTS
+        Route::resource('reports', ReportController::class, [
             'except' => ['create', 'show']
         ]);
 
