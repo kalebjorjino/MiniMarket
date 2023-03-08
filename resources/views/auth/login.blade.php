@@ -48,7 +48,7 @@
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}</label>
                                     @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}" style="text-decoration: underline; text-align: right;">{{ __('Forgot Your Password?') }}</a>
+                                        <a href="{{ route('password.request') }}" style="text-decoration: underline; text-align: right; padding-left: 45px;">{{ __('Forgot Your Password?') }}</a>
                                     @endif
                             </div>
                             
