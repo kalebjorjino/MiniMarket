@@ -14,7 +14,6 @@
                     @csrf
                     @method('PUT')
 
-                    <input type="text" id="e_id" hidden>
                     <div class="form-group row mb-3">
                         <label for="e_first_name" class="col-sm-3 col-form-label">First Name <span
                                 class="text-danger">*</span> </label>

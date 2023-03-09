@@ -31,6 +31,8 @@
         </div>
         <!-- end row -->
     </div>
+    @include('admin.categories.create-cat')
+    @include('admin.categories.update-cat')
     <!-- ========== title-wrapper end ========== -->
 
     <div class="card-styles">
@@ -100,6 +102,23 @@
 @endsection
 
 @section('script')
+    // SHOW MODAL IF ERROR
+    @if ($errors->has('name'))
+        <script>
+            $(document).ready(function() {
+                $('#createModal').modal('show');
+            });
+        </script>
+    @endif
+
+    @if ($errors->has('e_name'))
+        <script>
+            $(document).ready(function() {
+                $('#editModal').modal('show');
+            });
+        </script>
+    @endif
+
     <script>
         // DATATABLES
         $(document).ready(function() {
@@ -109,6 +128,75 @@
                 "autoWidth": false,
                 "ordering": false,
                 // "info": false,
+            })
+        });
+
+
+        // EDIT
+        $('#editModal').on('show.bs.modal', function(e) {
+            var button = $(e.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var url = "{{ route('categories.edit', ':id') }}".replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#e_id').val(data.id);
+                    $('#e_name').val(data.name);
+                    $('#edit-form').attr('action', "{{ route('categories.update', ':id') }}".replace(
+                        ':id',
+                        id));
+                }
+            });
+        })
+
+        // DELETE  
+        var url = window.location.href;
+
+        $('body').on('click', '.destroy', function(e) {
+            e.preventDefault();
+            let id = $(this).data('id')
+            console.log(id);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`${url}/${id}`).then(function(r) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'The record has been deleted.',
+                            'success'
+                        )
+                    }).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action is cancelled',
+                        'error'
+                    )
+                }
             })
         });
     </script>
