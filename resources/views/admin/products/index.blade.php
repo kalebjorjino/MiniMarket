@@ -54,29 +54,29 @@
                                 <th>
                                     <h6>#</h6>
                                 </th>
-                                <th data-orderable="false">
-                                    <h6>Order No</h6>
+                                <th>
+                                    <h6>Product</h6>
                                 </th>
                                 <th>
-                                    <h6>Customer</h6>
+                                    <h6>Price</h6>
+                                </th>
+                                {{-- <th>
+                                    <h6>Unit</h6>
+                                </th> --}}
+                                <th>
+                                    <h6>Stock</h6>
                                 </th>
                                 <th>
-                                    <h6>Total</h6>
+                                    <h6>Category</h6>
                                 </th>
                                 <th>
-                                    <h6>Paid</h6>
-                                </th>
-                                <th>
-                                    <h6>Balance</h6>
-                                </th>
-                                <th data-orderable="false">
-                                    <h6>Status</h6>
-                                </th>
-                                <th>
-                                    <h6>Order Date</h6>
+                                    <h6>Brand</h6>
                                 </th>
                                 <th>
                                     <h6>Updated at</h6>
+                                </th>
+                                <th>
+                                    <h6>Status</h6>
                                 </th>
                                 <th data-orderable="false">
                                     <h6>Actions</h6>

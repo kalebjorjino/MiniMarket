@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $record = Category::find($id);
         $record->name = $request->e_name;
         $record->save();
-        return redirect()->route('categories.index')->with('success', 'User updated successfully');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
 
     // Delete a record 

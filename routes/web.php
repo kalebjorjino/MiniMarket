@@ -6,6 +6,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\StorefrontController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ProductController;
@@ -102,6 +103,11 @@ Route::prefix('admin')->group(function () {
 
         // CATEGORIES
         Route::resource('categories', CategoryController::class, [
+            'except' => ['create', 'show']
+        ]);
+
+        // BRANDS
+        Route::resource('brands', BrandController::class, [
             'except' => ['create', 'show']
         ]);
 
