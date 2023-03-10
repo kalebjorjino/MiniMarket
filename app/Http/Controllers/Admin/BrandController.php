@@ -46,6 +46,9 @@ class BrandController extends Controller
         $record->description = $request->e_description;
 
         if ($request->hasFile('e_brand_image')){
+            if($record->brand_image){
+                Storage::disk('public')->delete($record->brand_image);
+            }
             $brand_image = Storage::disk('public')->put('/brands' . '/' . $id, $request->file('e_brand_image'));
             $record->brand_image = $brand_image;
         }
@@ -57,8 +60,10 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $record = Brand::findOrFail($id);
+         if($record->brand_image){
+            Storage::disk('public')->deleteDirectory('/brands' . '/' . $id);
+        }
         $record->delete(); 
-        $this->refreshDB();
         return response()->json([
             'status' => 200
         ]); 
