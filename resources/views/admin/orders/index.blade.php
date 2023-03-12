@@ -49,7 +49,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <h6>#</h6>
+                                    <h6>Order Date</h6>
                                 </th>
                                 <th data-orderable="false">
                                     <h6>Order No</h6>
@@ -58,25 +58,13 @@
                                     <h6>Customer</h6>
                                 </th>
                                 <th>
-                                    <h6>Total</h6>
-                                </th>
-                                <th>
-                                    <h6>Paid</h6>
-                                </th>
-                                <th>
-                                    <h6>Balance</h6>
+                                    <h6>Amount</h6>
                                 </th>
                                 <th data-orderable="false">
                                     <h6>Status</h6>
                                 </th>
-                                <th>
-                                    <h6>Order Date</h6>
-                                </th>
-                                <th>
-                                    <h6>Updated at</h6>
-                                </th>
                                 <th data-orderable="false">
-                                    <h6>Actions</h6>
+                                    <h6>Action</h6>
                                 </th>
                             </tr>
                             <!-- end table row-->
