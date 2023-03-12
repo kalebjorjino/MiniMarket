@@ -29,9 +29,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
-        Category::create([
-            'name' => 'Drinks'
-        ]);
+        Category::create(['name' => 'Beverage']);
+        Category::create(['name' => 'Noodles']);
+        Category::create(['name' => 'Condiments']);
+        Category::create(['name' => 'Meats & Sidedishes']);
+        Category::create(['name' => 'Ice cream']);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -7,9 +7,8 @@
             <div class="col-md-6">
                 <div class="title d-flex align-items-center flex-wrap mb-30">
                     <h2 class="mr-40">{{ __('Products') }}</h2>
-                    <button type="button" class="main-btn primary-btn btn-hover btn-sm" data-bs-target="#createModal"
-                        data-bs-toggle="modal">
-                        <i class="lni lni-plus mr-5"></i> New Product</button>
+                    <a href="{{ route('products.create') }}" class="main-btn primary-btn btn-hover btn-sm">
+                        <i class="lni lni-plus mr-5"></i> New Product</a>
                 </div>
             </div>
             <!-- end col -->
@@ -112,9 +111,7 @@
                         </tbody>
                     </table>
                     <!-- end table -->
-
                 </div>
-
             </div>
         </div>
     </div>

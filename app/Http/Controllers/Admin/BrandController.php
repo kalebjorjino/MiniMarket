@@ -60,7 +60,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $record = Brand::findOrFail($id);
-         if($record->brand_image){
+        if($record->brand_image){
             Storage::disk('public')->deleteDirectory('/brands' . '/' . $id);
         }
         $record->delete(); 

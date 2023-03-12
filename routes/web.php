@@ -98,7 +98,7 @@ Route::prefix('admin')->group(function () {
 
         // PRODUCTS
         Route::resource('products', ProductController::class, [
-            'except' => ['create', 'show']
+            'except' => ['show']
         ]);
 
         // CATEGORIES
