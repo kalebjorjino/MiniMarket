@@ -48,7 +48,6 @@ Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show a product 
 });
 
-// TODO cart + checkout routing
 
 
 Auth::routes();
@@ -116,16 +115,8 @@ Route::prefix('admin')->group(function () {
             'except' => ['create', 'show']
         ]);
 
-        // REPORTS
-        Route::resource('reports', ReportController::class, [
-            'except' => ['create', 'show']
-        ]);
-
-       
-
 
         Route::view('about', 'admin.about')->name('about');
-
 
         // REF
         // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
