@@ -25,6 +25,9 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/vue', function() {
+    return view('app');
+});
 
 
 // public routes 
