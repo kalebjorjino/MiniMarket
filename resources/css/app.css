@@ -1,0 +1,84 @@
+/*---------------------
+  profile
+-----------------------*/
+
+.profile-content {
+    margin-bottom: 30px;
+}
+.profile-content .h5-heading {
+    margin: 0;
+}
+.profile-content .hr-line hr {
+    margin-top: 5px;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid #dee2e6;
+}
+.profile-content .hr-line hr:before {
+    height: 1px;
+    background-color: #000;
+    content: "";
+    position: absolute;
+    width: 85px;
+    margin-top: -1px;
+}
+.profile-content form {
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+}
+.profile-content form .select-control::before {
+    right: 30px;
+}
+
+.profile-content form .input-group.date .input-group-prepend {
+    margin-right: 0;
+}
+
+.profile-content form .input-group.date .input-group-prepend .input-group-text {
+    border-left-width: 0;
+}
+
+.profile-content form .btn {
+    float: right;
+    padding: 13px 35px 11px;
+}
+
+.profile-content form input {
+    width: 100%;
+    font-size: 16px;
+    color: #636363;
+    /* height: 50px; */
+    /* border: 1px solid #ebebeb; */
+    /* padding-left: 20px; */
+}
+
+.profile-content form label {
+    margin-bottom: 20px;
+}
+
+/*---------------------
+  customer dashboard
+-----------------------*/
+
+.profile-content .dashboard {
+    float: left;
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+}
+
+.profile-content .dashboard .box {
+    border: 1px solid #ebebeb;
+    padding: 20px;
+    line-height: 24px;
+}
+
+.profile-content .dashboard a {
+    color: #ddab54;
+}
+
+.profile-content .dashboard a:hover {
+    color: #b48845;
+}

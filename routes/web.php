@@ -38,7 +38,10 @@ Route::view('/login', 'auth.login');
 Route::view('/register', 'auth.register');
 Route::view('/forgotPassword', 'auth.passwords.forgotPass');
 Route::view('/resetPassword', 'auth.passwords.customerReset');
+
+// Dashboard
 Route::view('/dashboard', 'customer.dashboard');
+Route::view('/changePassword', 'customer.changePassword');
 
 Route::view('/about', 'storefront.about');
 Route::view('/privacy-policy', 'storefront.privacy');
