@@ -24,7 +24,6 @@
         <!-- Profile Content -->
         <section class="profile-content">
             <div class="container" style="background-color: white; border-radius: 25px; padding: 30px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            height: ;
             margin: 0;
             position: absolute;
             top: 50%;
@@ -35,7 +34,7 @@
                     <div class="col-12 col-lg-3 mt-4">
                         <div class="heading">
                             <h2>
-                                Dashboard
+                                User
                             </h2>
                             <hr>
                         </div>
@@ -54,7 +53,7 @@
 
                             <div class="col-12 mb-4">
                                 <div class="col-md-12 box">
-                                    <i class="far fa-user"></i>
+                                    <br><br>
                                     <h2>Annyeonghaseyo, [insert name here]!</h2>
                                     <h4>What are you craving today?</h4>
                                     
