@@ -36,6 +36,7 @@ Route::controller(StorefrontController::class)->group(function(){
 
 Route::view('/login', 'auth.login');
 Route::view('/register', 'auth.register');
+Route::view('/resetPassword', 'auth.passwords.customerReset');
 Route::view('/dashboard', 'customer.dashboard');
 
 Route::view('/about', 'storefront.about');
