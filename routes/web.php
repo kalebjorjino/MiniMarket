@@ -41,6 +41,8 @@ Route::view('/resetPassword', 'auth.passwords.customerReset');
 
 // Dashboard
 Route::view('/dashboard', 'customer.dashboard');
+Route::view('/orders', 'customer.orders');
+Route::view('/profile', 'customer.profile');
 Route::view('/changePassword', 'customer.changePassword');
 
 Route::view('/about', 'storefront.about');

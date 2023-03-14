@@ -17,7 +17,7 @@
 
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/') }}">
+        <a class="nav-link" href="{{ url('/profile') }}">
             <i class="fa-solid fa-user" style="padding: 5px;"></i>
             Edit Profile
         </a>
@@ -25,7 +25,7 @@
 
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/change-password') }}">
+        <a class="nav-link" href="{{ url('/changePassword') }}">
             <i class="fas fa-unlock-alt" style="padding: 5px;"></i>
             Change Password
         </a>
