@@ -1,7 +1,7 @@
 <ul class="list-group account-side-menu">
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/dashboard') }}">
+        <a class="nav-link" href="{{ url('/account/dashboard') }}">
             <i class="fas fa-gauge" style="padding: 5px;"></i>
             Dashboard
         </a>
@@ -9,7 +9,7 @@
 
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/orders') }}">
+        <a class="nav-link" href="{{ url('/account/orders') }}">
             <i class="fas fa-bag-shopping" style="padding: 5px;"></i>
             My Orders
         </a>
@@ -17,7 +17,7 @@
 
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/profile') }}">
+        <a class="nav-link" href="{{ url('/account/profile') }}">
             <i class="fa-solid fa-user" style="padding: 5px;"></i>
             Edit Profile
         </a>
@@ -25,7 +25,7 @@
 
 
     <li class="list-group-item">
-        <a class="nav-link" href="{{ url('/changePassword') }}">
+        <a class="nav-link" href="{{ url('/account/changePassword') }}">
             <i class="fas fa-unlock-alt" style="padding: 5px;"></i>
             Change Password
         </a>
