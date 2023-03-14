@@ -32,12 +32,12 @@
     </li>
 
     <li class="list-group-item">
-        <form action="/logout/user" method="POST" style="padding: 0" id="logout">
+        <form method="POST" action="{{ route('userLogout') }}" style="padding: 0">
             @csrf
-            <a class="nav-link " href="javascript:{}" onclick="document.getElementById('logout').submit();">
+            <a href="{{ route('userLogout') }}"
+                onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link ">
                 <i class="fas fa-right-from-bracket" style="padding: 5px;"></i>
                 Logout
-            </a>
         </form>
     </li>
 </ul>

@@ -1,3 +1,18 @@
+body{
+    font-family: Lato;
+}
+
+.nav-link{
+    color: #2E32CD;
+}
+
+.bg-3{
+    background-image: url('/public/images/auth/SAMJ_LoginBG3.png'); 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover;
+}
+
 /*---------------------
   profile
 -----------------------*/

@@ -97,9 +97,7 @@
 
                             <button type="submit"
                                 class="btn site-btn button_hover mt-2 float-right">SUBMIT</button>
-
                         </form>
-
                     </div>
                 </div>
             </div>

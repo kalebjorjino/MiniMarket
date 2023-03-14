@@ -6,8 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>{{ config('app.name', 'SAM-J KMART ADMIN') }}</title>
-    @vite('resources/sass/app.scss')
+    <title>{{ config('app.name', 'SAM-J KMART') }}</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,25 +19,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- CSS Sheet -->
-    
+    @vite(['resources/sass/app.scss', 'resources/css/app.css'])
+   
 
-
-    <style>
-        body{
-            font-family: Lato;
-        }
-
-        .nav-link{
-            color: #2E32CD;
-        }
-    </style>
 </head>
-
 <body>
 
     <div class="row g-0 auth-row vh-100">
         @yield('content')
     </div>
+
+    <!-- ========= All Javascript files linkup ======== -->
+    {{-- <script src="{{ asset('js/main.js') }}"></script> --}}
+    @vite('resources/js/app.js')
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </body>
 
 </html>

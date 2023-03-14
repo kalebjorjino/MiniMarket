@@ -1,4 +1,4 @@
-@extends('admin.layouts.guest')
+@extends('layouts.app')
 
 @section('content')
     <!-- Register Section Start -->
@@ -42,7 +42,7 @@
                         <form method="POST" action="{{ route('password.update') }}">
                             @csrf
 
-                            <!--  -->
+                            <input type="hidden" name="token" value="{{ $token }}">
 
                             <div class="row mb-3">
                                 <label for="email"

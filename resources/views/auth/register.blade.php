@@ -46,7 +46,7 @@
                                     </span></label>
                                 <input id="first_name" type="text"
                                     class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-                                    value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
+                                    value="{{ old('first_name') }}" autofocus>
 
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -59,7 +59,7 @@
                                     </span></label>
                                 <input id="last_name" type="text"
                                     class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-                                    value="{{ old('last_name') }}" autocomplete="last_name">
+                                    value="{{ old('last_name') }}" >
 
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -75,7 +75,7 @@
 
                                 <input id="phone_number" type="text" name="phone_number"
                                     class="form-control @error('phone_number') is-invalid @enderror"
-                                    value="{{ old('phone_number') }}" autocomplete="phone_number">
+                                    value="{{ old('phone_number') }}">
 
                                 @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
@@ -97,20 +97,6 @@
                                     </span>
                                 @enderror
                             </div>
-                            <!-- ADDRESS -->
-                            <!-- <div class="group-input">
-                                <label for="address">Address<span class="text-danger"> *
-                                    </span>
-                                </label>
-
-                                <textarea id="address" type="text" name="address" rows="2" cols="50" class="form-control @error('address') is-invalid @enderror" value="{{ old('address') }}" autocomplete="address"></textarea>
-
-                                @error('address')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> -->
                             <div class="group-input">
                                 <label for="password">{{ __('Password') }}<span class="text-danger"> * </span></label>
 
@@ -130,7 +116,7 @@
 
                                 <input id="confirm_password" type="password"
                                     class="form-control @error('confirm_password') is-invalid @enderror"
-                                    name="confirm_password" autocomplete="confirm_password">
+                                    name="password_confirmation" autocomplete="confirm_password">
 
                                 @error('confirm_password')
                                     <span class="invalid-feedback" role="alert">
@@ -146,7 +132,7 @@
                                 </button>
                             </div>
                             <div class="switch-login" style="text-align: center; padding: 15px;">
-                            Already a member? <a href="/register" class="or-login" style="color: #cc2e3a; text-decoration:underline; ">Login here</a>
+                            Already have an account? <a href="{{route('login')}}" class="or-login" style="color: #cc2e3a; text-decoration:underline; ">Login here</a>
                         </div>
                         </form>
                     </div>

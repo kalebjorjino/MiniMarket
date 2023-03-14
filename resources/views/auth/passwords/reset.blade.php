@@ -24,6 +24,8 @@
                 <form action="{{ route('password.update') }}" method="POST">
                     @csrf
 
+                    <input type="hidden" name="token" value="{{ $token }}">
+
                     <div class="row">
                         <div class="col-12">
                             <div class="input-style-1">
@@ -43,7 +45,7 @@
                             <div class="input-style-1">
                                 <label>{{ __('Password') }}</label>
                                 <input type="password" @error('password') class="form-control is-invalid" @enderror
-                                    name="password" id="password" placeholder="{{ __('Password') }}" required
+                                    name="password" id="password" placeholder="{{ __('Current Password') }}" required
                                     autocomplete="new-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -68,27 +70,18 @@
                             </div>
                         </div>
                         <!-- end col -->
-                        <div class="col-xxl-6 col-lg-12 col-md-6">
-                            <div class="form-check checkbox-style mb-30">
-                                <input class="form-check-input" type="checkbox" name="remember" value=""
-                                    id="remember" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="checkbox-remember">
-                                    {{ __('Remember Me') }}</label>
-                            </div>
-                        </div>
-                        <!-- end col -->
-                        @if (Route::has('password.request'))
+                        {{-- @if (Route::has('password.request'))
                             <div class="col-xxl-6 col-lg-12 col-md-6">
                                 <div class="text-start text-md-end text-lg-start text-xxl-end mb-30">
                                     <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
                                 </div>
                             </div>
-                        @endif
+                        @endif --}}
                         <!-- end col -->
                         <div class="col-12">
                             <div class="button-group d-flex justify-content-center flex-wrap">
                                 <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center">
-                                    {{ __('Login') }}
+                                    {{ __('Reset Password') }}
                                 </button>
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 
 @section('content')
 <!-- Background -->
-<div style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+<div class="bg-3">
 
     <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
