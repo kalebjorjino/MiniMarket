@@ -22,6 +22,11 @@ class ProductController extends Controller
         return view('admin.products.create-product');
     }
 
+    // Store a record
+    public function store(Request $request)
+    {
+        
+    }
 
     // Delete a record 
     public function destroy($id)
