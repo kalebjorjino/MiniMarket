@@ -8,6 +8,10 @@ import "./bootstrap";
 import "./sweetalert2";
 import { createApp } from "vue";
 
+// import VueLazyload from "vue-lazyload";
+
+// Vue.use(VueLazyload);
+
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
  * registering components with the application instance so they are ready
@@ -16,8 +20,8 @@ import { createApp } from "vue";
 
 const app = createApp({});
 
-import ExampleComponent from "./components/ExampleComponent.vue";
-app.component("example-component", ExampleComponent);
+// import ExampleComponent from "./components/ExampleComponent.vue";
+// app.component("example-component", ExampleComponent);
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,9 +31,17 @@ app.component("example-component", ExampleComponent);
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
+Object.entries(import.meta.glob("./**/*.vue", { eager: true })).forEach(
+    ([path, definition]) => {
+        app.component(
+            path
+                .split("/")
+                .pop()
+                .replace(/\.\w+$/, ""),
+            definition.default
+        );
+    }
+);
 
 /**
  * Finally, we will attach the application instance to a HTML element with

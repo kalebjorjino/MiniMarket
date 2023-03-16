@@ -117,6 +117,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('expenses', ExpenseController::class, [
             'except' => ['create', 'show']
         ]);
+        Route::get('getProduct', [ExpensesController::class, 'getProduct'])->name('getProduct');
 
 
         Route::view('about', 'admin.about')->name('about');
