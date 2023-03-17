@@ -1,8 +1,8 @@
-@extends('admin.layouts.guest')
+@extends('layouts.app')
 
 @section('content')
-    <!-- Register Section Start -->
-    <div class="register-login-section spad" style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
+    <!-- Forgot  Section Start -->
+    <div class="register-login-section spad" style="background-image: url('images\auth\SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
     <!-- <img src="{{ asset('images/Food1.png') }}" style="
         position: absolute;
         left: -100px;
@@ -36,43 +36,41 @@
         transform: translate(-50%, -50%);">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
-                <div class="card-body">
-                    <h2 style="text-align: center; font-size:3em; font: 900 3em Lato;">Forgot Password</h2>
+                    <div class="register-form">
+                        <h2 style="text-align: center; font-size:3em; font: 900 3em Lato;">Forgot Password?</h2>
                         <br>
-                        <form method="POST" action="{{ route('password.update') }}">
+                        <form method="POST" action="{{ route('register') }}">
                             @csrf
 
-                            <!--  -->
+                            <div class="group-input">
+                                <label for="email">{{ __('Email Address') }}<span class="text-danger"> * </span></label>
 
-                            <div class="row mb-3">
-                                <label for="email"
-                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                <input id="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" autocomplete="email">
 
-                                <div class="col-md-6">
-                                    <input id="email" type="email"
-                                        class="form-control @error('email') is-invalid @enderror" name="email"
-                                        value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-
-
-                            <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Get Reset Link') }}
-                                    </button>
-                                </div>
+                            
+                            <br>
+                            <div class="col-12" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
+                            <div class="button-group d-flex justify-content-center flex-wrap">
+                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center" style="padding: 10px; font-size:1.3em; background-color: #2d32cd;">
+                                    {{ __('Request Reset Link') }}
+                                </button>
                             </div>
+                            <div class="switch-login" style="text-align: center; padding: 15px;">
+                            Remembered it? <a href="{{route('login')}}" class="or-login" style="color: #cc2e3a; text-decoration:underline; ">Login here</a>
+                        </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Register Section End -->
+    </div>
+        <!-- Forgot Pass Section End -->
 @endsection

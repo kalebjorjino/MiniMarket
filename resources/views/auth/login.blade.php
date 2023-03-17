@@ -1,4 +1,4 @@
-@extends('admin.layouts.guest')
+@extends('layouts.app')
 
 @section('content')
 <div style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
