@@ -60,6 +60,9 @@
                                     <h6>Category Name</h6>
                                 </th>
                                 <th>
+                                    <h6>Category Icon</h6>
+                                </th>
+                                <th>
                                     <h6>Actions</h6>
                                 </th>
                             </tr>
@@ -73,6 +76,12 @@
                                     </td>
                                     <td>
                                         <p>{{ $c->name }}</p>
+                                    </td>
+                                    <td>
+                                        @if ($c->category_icon != '')
+                                            <img src="{{ url('storage/' . $c->category_icon) }}" alt="{{ $c->name }}"
+                                                width="50px" height="50px" class="img-thumbnail img-fluid">
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="flex justify-content-end">
