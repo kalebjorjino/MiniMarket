@@ -17,17 +17,17 @@ return new class extends Migration
             $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->decimal('price')->nullable();
+            $table->integer('stocks')->nullable();
 
-            $table->string('folder')->nullable(); 
             $table->longText('product_cover')->nullable(); // main preview
             $table->longText('product_images')->nullable();
 
             // $table->boolean('hidden')->default(true);
-            $table->boolean('featured')->default(false);
-            $table->boolean('status')->default(true);
+            $table->boolean('featured')->default(false)->nullable();
+            $table->boolean('status')->default(true)->nullable();
 
-            $table->foreignId('brand_id')->constrained('brands')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('brand_id')->nullable()->constrained('brands')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

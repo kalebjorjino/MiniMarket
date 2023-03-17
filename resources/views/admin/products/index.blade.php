@@ -59,9 +59,6 @@
                                 <th>
                                     <h6>Price</h6>
                                 </th>
-                                {{-- <th>
-                                    <h6>Unit</h6>
-                                </th> --}}
                                 <th>
                                     <h6>Stock</h6>
                                 </th>
@@ -84,13 +81,35 @@
                             <!-- end table row-->
                         </thead>
                         <tbody>
-                            {{-- @foreach ($products as $product)
+                            @foreach ($products as $product)
                                 <tr>
                                     <td>
                                         <p>{{ $product->id }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $product->name }}</p>
+                                        <p>{{ $product->title }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $product->price }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $product->stocks }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $product->category->name }}</p>
+                                    </td>
+                                    <td>
+                                        {{-- <p>{{ $product->brand->name }}</p> --}}
+                                    </td>
+                                    <td>
+                                        <p>{{ $product->updated_at }}</p>
+                                    </td>
+                                    <td>
+                                        @if ($product->status)
+                                            <p>Active</p>
+                                        @else
+                                            <p>Inactive</p>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="flex justify-content-end">
@@ -106,7 +125,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                             <!-- end table row -->
                         </tbody>
                     </table>
@@ -145,6 +164,55 @@
                     }
                 ]
             }).buttons().container().appendTo('#data_table_wrapper .col-md-6:eq(0)');
+        });
+
+
+        // DELETE  
+        var url = window.location.href;
+
+        $('body').on('click', '.destroy', function(e) {
+            e.preventDefault();
+            let id = $(this).data('id')
+            console.log(id);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`${url}/${id}`).then(function(r) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'The record has been deleted.',
+                            'success'
+                        )
+                    }).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action is cancelled',
+                        'error'
+                    )
+                }
+            })
         });
     </script>
 @endsection
