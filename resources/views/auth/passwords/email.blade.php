@@ -1,63 +1,78 @@
 @extends('admin.layouts.guest')
 
 @section('content')
-    <div class="col-lg-6">
-        <div class="auth-cover-wrapper bg-primary-100">
-            <div class="auth-cover">
-                <div class="title text-center">
-                    <h1 class="text-primary mb-10">{{ __('Reset Password') }}</h1>
-                </div>
-                <div class="cover-image">
-                    <img src="{{ asset('images/auth/signin-image.svg') }}" alt="">
-                </div>
-                <div class="shape-image">
-                    <img src="{{ asset('images/auth/shape.svg') }}" alt="">
+    <!-- Register Section Start -->
+    <div class="register-login-section spad" style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
+    <!-- <img src="{{ asset('images/Food1.png') }}" style="
+        position: absolute;
+        left: -100px;
+        top: 450px;
+        z-index: 1;
+        width: 35%;">
+    <img src="{{ asset('images/Food2.png') }}" style="
+        position: absolute;
+        left: 1450px;
+        top: 0px;
+        z-index: 1;
+        width: 40%;">
+    <img src="{{ asset('images/Food3.png') }}" style="
+        position: absolute;
+        left: 1550px;
+        top: 450px;
+        z-index: 1;
+        width: 28%;">
+    <img src="{{ asset('images/Food3.png') }}" style="
+        position: absolute;
+        left: 1350px;
+        top: 450px;
+        z-index: 1;
+        width: 30%;"> -->
+        <div class="container" style="background-color: white; border-radius: 25px; padding: 30px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                <div class="card-body">
+                    <h2 style="text-align: center; font-size:3em; font: 900 3em Lato;">Forgot Password</h2>
+                        <br>
+                        <form method="POST" action="{{ route('password.update') }}">
+                            @csrf
+
+                            <!--  -->
+
+                            <div class="row mb-3">
+                                <label for="email"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="email"
+                                        class="form-control @error('email') is-invalid @enderror" name="email"
+                                        value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="row mb-0">
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Get Reset Link') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end col -->
-    <div class="col-lg-6">
-        <div class="signin-wrapper">
-            <div class="form-wrapper">
-                <h6 class="mb-15">{{ __('Reset Password') }}</h6>
-
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                <form action="{{ route('password.email') }}" method="POST">
-                    @csrf
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="input-style-1">
-                                <label for="email">{{ __('Email') }}</label>
-                                <input @error('email') class="form-control is-invalid" @enderror type="email"
-                                    name="email" id="email" placeholder="{{ __('Email') }}" required
-                                    autocomplete="email" autofocus>
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        <!-- end col -->
-                        <div class="col-12">
-                            <div class="button-group d-flex justify-content-center flex-wrap">
-                                <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- end col -->
+        <!-- Register Section End -->
 @endsection
