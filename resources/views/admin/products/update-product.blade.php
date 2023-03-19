@@ -6,7 +6,7 @@
         <div class="row align-items-center">
             <div class="col-md-6">
                 <div class="title mb-30">
-                    <h2>{{ __('Create Product') }}</h2>
+                    <h2>{{ __('Edit Product') }}</h2>
                 </div>
             </div>
             <!-- end col -->
@@ -21,7 +21,7 @@
                                 <a href="{{ route('products.index') }}">Products</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Create Product
+                                Edit Product
                             </li>
                         </ol>
                     </nav>
@@ -34,8 +34,10 @@
     <!-- ========== title-wrapper end ========== -->
     <div id="app">
         <div class="card-styles">
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('products.update', $record->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
+
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card-style-3 mb-30">
@@ -50,8 +52,8 @@
                                             </label>
                                             <input id="title" name="title" type="text"
                                                 class="form-control @error('title') is-invalid @enderror"
-                                                value="{{ old('title') }}" placeholder="Enter Product Title" required
-                                                autofocus>
+                                                value="{{ old('title', $record->title) }}" placeholder="Enter Product Title"
+                                                required autofocus>
                                             @error('title')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -67,10 +69,10 @@
                                             <select name="category" id="category"
                                                 class="form-control @error('category') is-invalid @enderror"
                                                 aria-label="Product Category select" required>
-                                                <option value="" disabled selected>Choose category
-                                                </option>
+
                                                 @foreach ($categories as $cat)
-                                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                                    <option value="{{ $cat->id }}" @selected(old('category', $record->category_id) == $cat->id)>
+                                                        {{ $cat->name }}</option>
                                                 @endforeach
                                             </select>
 
@@ -89,10 +91,11 @@
                                             <select name="brand" id="brand"
                                                 class="form-control @error('brand') is-invalid @enderror"
                                                 aria-label="Product brand select">
-                                                <option value="" selected disabled>Choose brand
-                                                </option>
+
                                                 @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                                    <option value="{{ $brand->id }}" @selected(old('brand', $record->brand_id) == $brand->id)>
+                                                        {{ $brand->name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
 
@@ -109,7 +112,8 @@
                                             </label>
                                             <input id="price" name="price" type="number"
                                                 class="form-control @error('price') is-invalid @enderror"
-                                                value="{{ old('price') }}" placeholder="Enter Product Price" required>
+                                                value="{{ old('price', $record->price) }}"
+                                                placeholder="Enter Product Price" required>
                                             @error('price')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -123,7 +127,8 @@
                                             </label>
                                             <input id="stocks" name="stocks" type="number"
                                                 class="form-control @error('stocks') is-invalid @enderror"
-                                                value="{{ old('stocks') }}" placeholder="Enter no of stocks" required>
+                                                value="{{ old('stocks', $record->stocks) }}"
+                                                placeholder="Enter no of stocks" required>
                                             @error('stocks')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -137,7 +142,7 @@
                                             </label>
                                             <input id="stock_alert" name="stock_alert" type="number"
                                                 class="form-control @error('stock_alert') is-invalid @enderror"
-                                                value="{{ old('stock_alert') ? old('stock_alert') : 0 }}" required>
+                                                value="{{ old('stock_alert', $record->stock_alert) }}" required>
                                             @error('stock_alert')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -147,11 +152,11 @@
                                         <div class="form-group col-md-12 mb-2">
                                             <label for="description" class="col-form-label">Product Description</label>
                                             <textarea type="text" rows="3" class="form-control" id="description" name="description"
-                                                placeholder="Enter Product Description">{{ old('description') }}</textarea>
+                                                placeholder="Enter Product Description">{{ old('description', $record->description) }}</textarea>
                                         </div>
                                         <div class="form-check col-md-12 my-2 ms-4">
                                             <input class="form-check-input" type="checkbox" value="1"
-                                                id="featured" name="featured">
+                                                id="featured" name="featured" @checked(old('featured', $record->featured))>
                                             <label class="form-check-label" for="featured">
                                                 Featured
                                             </label>
@@ -161,7 +166,7 @@
                                         </div>
                                         <div class="form-check col-md-12  mb-2  ms-4">
                                             <input class="form-check-input" type="checkbox" value="1"
-                                                id="status" name="status">
+                                                id="status" name="status" @checked(old('status', $record->status))>
                                             <label class="form-check-label" for="status">
                                                 Status
                                             </label>
@@ -189,22 +194,46 @@
                                             name="product_cover" accept=".png, .jpg, .jpeg"
                                             onchange="previewImage(event)">
                                     </div>
-                                    <img id="preview" src="#" alt="Preview Image"
-                                        style="display:none; width:150px" class="img-thumbnail img-fluid mx-3 mt-2">
+
+
+                                    <div id="preview-container" class="mt-2"
+                                        style="display:none; max-width: 200px; max-height: 200px; overflow:hidden;">
+                                        <img id="preview" src="#" alt="Preview Image" style="display:none;"
+                                            class="img-thumbnail">
+                                    </div>
+
+                                    @if ($record->product_cover)
+                                        <div class="mt-3" style="width: 200px; max-height: 200px; overflow:hidden;">
+                                            <img src="{{ url('storage/' . $record->product_cover) }}" alt="Product Cover"
+                                                id="cover" class="img-thumbnail img-fluid">
+                                        </div>
+                                    @endif
                                 </div>
 
-                                {{-- <div class="form-group row mb-3">
-                                    <p>Product Preview Images</p>
-                                    <div class="col-xs-6">
-                                        <input class="form-control form-control-sm" type="file" name="images[]"
-                                            accept=".png, .jpg, .jpeg" id="" multiple>
-                                    </div>
-                                </div> --}}
-                                <div class="form-group row mb-3">
-                                    <label for="document">Product Previews</label>
+                                <label for="document">Upload Product Previews</label>
+                                <span class="text-sm text-danger">Note: <i>Uploading will overwrite current preview
+                                        image/s</i></span>
+                                <div class="form-group row mb-3 px-2">
                                     <div class="needsclick dropzone" id="document-dropzone">
                                     </div>
                                 </div>
+                                <div class="row mb-3">
+                                    @unless(count($mediaItems) == 0)
+                                        <p>Product Preview Images</p>
+                                        @foreach ($mediaItems as $media)
+                                            <div class="col mt-2" style="width: 125px; max-height: 125px; overflow:hidden;">
+                                                <img src="{{ $media->getUrl() }}" alt="{{ $media->name }}"
+                                                    class="img-thumbnail">
+                                                {{-- {{ $media->getUrl() }} --}}
+                                                {{-- <a href="#" class="btn btn-danger"
+                                                onclick="deleteMedia({{ $media->id }})">Delete</a> --}}
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <p>No previews found</p>
+                                    @endunless
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -222,8 +251,12 @@
         function previewImage(event) {
             var input = event.target;
             var preview = document.getElementById("preview");
+            var pContainer = document.getElementById("preview-container");
+            var cover = document.getElementById("cover");
 
             preview.style.display = "block";
+            pContainer.style.display = "block";
+            cover.style.display = "none";
 
             var reader = new FileReader();
             reader.onload = function() {
@@ -231,11 +264,6 @@
             }
             reader.readAsDataURL(input.files[0]);
         }
-
-
-        // const output = document.querySelector("output")
-        // const input = document.getElementById("input")
-        // let imagesArray = []
     </script>
 
     <script>
@@ -264,8 +292,7 @@
             },
             init: function() {
                 @if (isset($product) && $product->document)
-                    var files =
-                        {!! json_encode($product->document) !!}
+                    var files = {!! json_encode($product->document) !!}
                     for (var i in files) {
                         var file = files[i]
                         this.options.addedfile.call(this, file)

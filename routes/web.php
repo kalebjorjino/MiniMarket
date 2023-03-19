@@ -102,6 +102,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('products', ProductController::class, [
             'except' => ['show']
         ]);
+        Route::post('products/media', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
 
         // CATEGORIES
         Route::resource('categories', CategoryController::class, [

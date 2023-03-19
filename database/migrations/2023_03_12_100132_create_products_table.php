@@ -18,11 +18,11 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->decimal('price')->nullable();
             $table->integer('stocks')->nullable();
+            $table->integer('stock_alert')->nullable();
 
             $table->longText('product_cover')->nullable(); // main preview
-            $table->longText('product_images')->nullable();
+            // $table->longText('product_images')->nullable(); // unused
 
-            // $table->boolean('hidden')->default(true);
             $table->boolean('featured')->default(false)->nullable();
             $table->boolean('status')->default(true)->nullable();
 

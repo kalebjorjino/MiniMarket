@@ -87,19 +87,31 @@
                                         <p>{{ $product->id }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $product->title }}</p>
+                                        <div class="product">
+                                            @if ($product->product_cover != '')
+                                                <div class="image">
+                                                    <img src="{{ url('storage/' . $product->product_cover) }}"
+                                                        alt="{{ $product->slug }}" />
+                                                </div>
+                                            @endif
+                                            <p>{{ $product->title }}</p>
+                                        </div>
                                     </td>
                                     <td>
-                                        <p>{{ $product->price }}</p>
+                                        <p>₱{{ $product->price }}</p>
                                     </td>
                                     <td>
                                         <p>{{ $product->stocks }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $product->category->name }}</p>
+                                        <p>
+                                            {{ $product->category_id ? $product->category->name : '' }}
+                                        </p>
                                     </td>
                                     <td>
-                                        {{-- <p>{{ $product->brand->name }}</p> --}}
+                                        <p>
+                                            {{ $product->brand_id ? $product->brand->name : 'Unbranded' }}
+                                        </p>
                                     </td>
                                     <td>
                                         <p>{{ $product->updated_at }}</p>
@@ -113,15 +125,14 @@
                                     </td>
                                     <td>
                                         <div class="flex justify-content-end">
-                                            <button class="edit-btn" data-bs-target="#editModal" data-bs-toggle="modal"
-                                                data-id="{{ $product->id }}">
+                                            <a href="{{ route('products.edit', $product->id) }}" class="edit-btn">
                                                 <i class="lni lni-pencil"></i>
-                                            </button>
-                                            <button class="destroy delete-btn ml-8" data-id="{{ $product->id }}">
-                                                <i
-                                                    class="lni
+                                                </button>
+                                                <button class="destroy delete-btn ml-8" data-id="{{ $product->id }}">
+                                                    <i
+                                                        class="lni
                                             lni-trash-can"></i>
-                                            </button>
+                                                </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -144,6 +155,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
+                "aaSorting": [],
                 buttons: [{
                         extend: 'excelHtml5',
                         exportOptions: {
