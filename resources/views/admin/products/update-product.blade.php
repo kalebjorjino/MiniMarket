@@ -221,7 +221,8 @@
                                     @unless(count($mediaItems) == 0)
                                         <p>Product Preview Images</p>
                                         @foreach ($mediaItems as $media)
-                                            <div class="col mt-2" style="width: 125px; max-height: 125px; overflow:hidden;">
+                                            <div class="col mt-2"
+                                                style="width: 125px; max-width: 125px; max-height: 125px; overflow:hidden;">
                                                 <img src="{{ $media->getUrl() }}" alt="{{ $media->name }}"
                                                     class="img-thumbnail">
                                                 {{-- {{ $media->getUrl() }} --}}
