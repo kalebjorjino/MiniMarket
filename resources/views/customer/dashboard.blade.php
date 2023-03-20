@@ -4,22 +4,7 @@
 <!-- Background -->
 <div class="bg-3">
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="/"><i class="fa fa-home"></i> Home</a>
-                        <span>Dashboard</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
-
-    <section class="pro-content">
+    <section class="container">
 
         <!-- Profile Content -->
         <section class="profile-content">

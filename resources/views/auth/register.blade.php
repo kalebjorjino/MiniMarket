@@ -1,8 +1,8 @@
-@extends('admin.layouts.guest')
+@extends('layouts.app')
 
 @section('content')
     <!-- Register Section Start -->
-    <div class="register-login-section spad" style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover; position: relative;">
+    <div class="bg-3">
     <!-- <img src="{{ asset('images/Food1.png') }}" style="
         position: absolute;
         left: -100px;
@@ -128,7 +128,7 @@
                             <div class="col-12" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
                             <div class="button-group d-flex justify-content-center flex-wrap">
                                 <button type="submit" class="main-btn primary-btn btn-hover w-100 text-center" style="padding: 10px; font-size:1.3em; background-color: #2d32cd;">
-                                    {{ __('Register') }}
+                                    {{ __('Create account') }}
                                 </button>
                             </div>
                             <div class="switch-login" style="text-align: center; padding: 15px;">
