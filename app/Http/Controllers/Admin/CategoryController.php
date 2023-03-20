@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -16,7 +18,20 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        Category::create(['name' => $request->name]);
+        $formFields = $request->validate(['name' => ['required', 'string', 'unique:categories']]);
+
+        // To Delete
+        // $slug = Str::slug($request->name, '-');
+        // $path = '/public/products' .'/'. $slug;
+        // Storage::makeDirectory($path);
+
+        $category = Category::create(['name' => $formFields['name']]);
+      
+        if ($request->hasFile('category_icon')){
+            $category_icon = Storage::disk('public')->put('/categories' . '/' . $category->id, $request->file('category_icon'));
+            $category->update(['category_icon' => $category_icon]);
+        }
+
         return redirect()->route('categories.index')->with('success', 'Category created succesfully');
     }
 

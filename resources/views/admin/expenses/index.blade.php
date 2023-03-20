@@ -31,6 +31,8 @@
         </div>
         <!-- end row -->
     </div>
+    @include('admin.expenses.create-expense')
+
     <!-- ========== title-wrapper end ========== -->
 
     <div class="card-styles">
@@ -54,29 +56,23 @@
                                 <th>
                                     <h6>#</h6>
                                 </th>
-                                <th data-orderable="false">
-                                    <h6>Order No</h6>
+                                <th>
+                                    <h6>Expense Date</h6>
                                 </th>
                                 <th>
-                                    <h6>Customer</h6>
+                                    <h6>Category</h6>
                                 </th>
                                 <th>
-                                    <h6>Total</h6>
+                                    <h6>Product</h6>
                                 </th>
                                 <th>
-                                    <h6>Paid</h6>
+                                    <h6>Quantity</h6>
                                 </th>
                                 <th>
-                                    <h6>Balance</h6>
-                                </th>
-                                <th data-orderable="false">
-                                    <h6>Status</h6>
+                                    <h6>Total Price</h6>
                                 </th>
                                 <th>
-                                    <h6>Order Date</h6>
-                                </th>
-                                <th>
-                                    <h6>Updated at</h6>
+                                    <h6>Supplier</h6>
                                 </th>
                                 <th data-orderable="false">
                                     <h6>Actions</h6>
@@ -148,6 +144,32 @@
                     }
                 ]
             }).buttons().container().appendTo('#data_table_wrapper .col-md-6:eq(0)');
+        });
+
+        // CREATE 
+
+        // Set expense date by default
+        document.getElementById('expense_date').valueAsDate = new Date();
+
+
+        // Load Category when Product Title is changed
+        $('#product_title').on('change', function(e) {
+            e.preventDefault();
+
+            var id = $(this).val();
+
+            $.ajax({
+                url: '{{ route('getProduct') }}',
+                method: 'get',
+                data: {
+                    'search': id
+                },
+                success: function(res) {
+                    // $('#search_list').html(data);
+                    // console.log(res);
+                    $("#category").val(res.category_id);
+                }
+            });
         });
     </script>
 @endsection

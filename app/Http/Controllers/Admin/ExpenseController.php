@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +14,19 @@ class ExpenseController extends Controller
     {
         // $expenses = Expense::all()->sortByDesc('created_at');
         // return view('admin.expenses.index', ['expenses' => $expenses]);
-        return view('admin.expenses.index');
+        
+        $categories = Category::all();
+        $products = Product::all();
+        return view('admin.expenses.index', ['products' => $products, 'categories' => $categories]);
+    }
+
+    
+    public function getProduct(Request $request)
+    {
+         $id=$request['search'] ?? "";
+         if ($id !=""){
+             $query = Product::find($id);
+         }
+        return response()->json($query);
     }
 }

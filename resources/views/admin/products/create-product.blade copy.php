@@ -34,13 +34,12 @@
     <!-- ========== title-wrapper end ========== -->
     <div id="app">
         <div class="card-styles">
-            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="card-style-3 mb-30">
-                            <div class="card-content">
-
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card-style-3 mb-30">
+                        <div class="card-content">
+                            <form method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="card-body ">
                                     <div class="row justify-content-around">
 
@@ -67,11 +66,10 @@
                                             <select name="category" id="category"
                                                 class="form-control @error('category') is-invalid @enderror"
                                                 aria-label="Product Category select" required>
-                                                <option value="" disabled selected>Choose category
+                                                <option value="" selected disabled>Choose category
                                                 </option>
-                                                @foreach ($categories as $cat)
-                                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                                @endforeach
+                                                <option value="1">Cat-1</option>
+                                                <option value="2">Cat-2</option>
                                             </select>
 
                                             @error('category')
@@ -88,12 +86,11 @@
 
                                             <select name="brand" id="brand"
                                                 class="form-control @error('brand') is-invalid @enderror"
-                                                aria-label="Product brand select">
+                                                aria-label="Product brand select" required>
                                                 <option value="" selected disabled>Choose brand
                                                 </option>
-                                                @foreach ($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                @endforeach
+                                                <option value="1">Brand-1</option>
+                                                <option value="2">Brand-2</option>
                                             </select>
 
                                             @error('brand')
@@ -146,73 +143,42 @@
                                         </div>
                                         <div class="form-group col-md-12 mb-2">
                                             <label for="description" class="col-form-label">Product Description</label>
-                                            <textarea type="text" rows="3" class="form-control" id="description" name="description"
+                                            <textarea type="text" class="form-control" id="description" name="description"
                                                 placeholder="Enter Product Description">{{ old('description') }}</textarea>
                                         </div>
-                                        <div class="form-check col-md-12 my-2 ms-4">
-                                            <input class="form-check-input" type="checkbox" value="1"
-                                                id="featured" name="featured">
-                                            <label class="form-check-label" for="featured">
-                                                Featured
-                                            </label>
-                                            <label class="form-check-label" style="display:block;" for="featured">
-                                                Specify if the product is featured
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-md-12  mb-2  ms-4">
-                                            <input class="form-check-input" type="checkbox" value="1"
-                                                id="status" name="status">
-                                            <label class="form-check-label" for="status">
-                                                Status
-                                            </label>
-                                            <label class="form-check-label" style="display:block;" for="status">
-                                                Specify the status of the product (active/inactive)
-                                            </label>
-                                        </div>
-
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card-style-3 mb-30">
-                            <div class="card-body ">
-
-                                <div class="form-group row mb-4">
-                                    <label for="product_cover" class="col-form-label">Product Cover Image <span
-                                            class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-xs-6">
-                                        <input class="form-control form-control-sm" type="file" id="product_cover"
-                                            name="product_cover" accept=".png, .jpg, .jpeg"
-                                            onchange="previewImage(event)">
-                                    </div>
-                                    <img id="preview" src="#" alt="Preview Image"
-                                        style="display:none; width:150px" class="img-thumbnail img-fluid mx-3 mt-2">
-                                </div>
-
-                                {{-- <div class="form-group row mb-3">
-                                    <p>Product Preview Images</p>
-                                    <div class="col-xs-6">
-                                        <input class="form-control form-control-sm" type="file" name="images[]"
-                                            accept=".png, .jpg, .jpeg" id="" multiple>
-                                    </div>
-                                </div> --}}
-                                <div class="form-group row mb-3">
-                                    <label for="document">Product Previews</label>
-                                    <div class="needsclick dropzone" id="document-dropzone">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-2 col-md-12">
-                        <button type="submit" class="main-btn primary-btn btn-hover btn-sm"
-                            id="submit">Submit</button>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="card-style-3 mb-30">
+                        <div class="card-body ">
+
+                            <div class="form-group row mb-4">
+                                <label for="product_cover" class="col-form-label">Product Cover Image <span
+                                        class="text-danger">*</span>
+                                </label>
+                                <div class="col-xs-6">
+                                    <input class="form-control form-control-sm" type="file" id="product_cover"
+                                        name="product_cover" accept=".png, .jpg, .jpeg" onchange="previewImage(event)">
+                                </div>
+                                <img id="preview" src="#" alt="Preview Image" style="display:none; width:150px"
+                                    class="img-thumbnail img-fluid mx-3 mt-2">
+                            </div>
+
+                            <div class="form-group row">
+                                <p>Product Preview Images</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 col-md-12">
+                    <button type="submit" class="main-btn primary-btn btn-hover btn-sm" id="submit">Submit</button>
+                </div>
+            </div>
             </form>
         </div>
     </div>
@@ -230,50 +196,6 @@
                 preview.src = reader.result;
             }
             reader.readAsDataURL(input.files[0]);
-        }
-
-
-        // const output = document.querySelector("output")
-        // const input = document.getElementById("input")
-        // let imagesArray = []
-    </script>
-
-    <script>
-        var uploadedDocumentMap = {}
-        Dropzone.options.documentDropzone = {
-            url: '{{ route('products.storeMedia') }}',
-            maxFilesize: 2, // MB
-            addRemoveLinks: true,
-            acceptedFiles: 'image/*',
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}"
-            },
-            success: function(file, response) {
-                $('form').append('<input type="hidden" name="document[]" value="' + response.name + '">')
-                uploadedDocumentMap[file.name] = response.name
-            },
-            removedfile: function(file) {
-                file.previewElement.remove()
-                var name = ''
-                if (typeof file.file_name !== 'undefined') {
-                    name = file.file_name
-                } else {
-                    name = uploadedDocumentMap[file.name]
-                }
-                $('form').find('input[name="document[]"][value="' + name + '"]').remove()
-            },
-            init: function() {
-                @if (isset($product) && $product->document)
-                    var files =
-                        {!! json_encode($product->document) !!}
-                    for (var i in files) {
-                        var file = files[i]
-                        this.options.addedfile.call(this, file)
-                        file.previewElement.classList.add('dz-complete')
-                        $('form').append('<input type="hidden" name="document[]" value="' + file.file_name + '">')
-                    }
-                @endif
-            }
         }
     </script>
 @endsection

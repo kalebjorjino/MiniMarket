@@ -14,7 +14,8 @@
         <!-- end row -->
     </div>
     <!-- ========== title-wrapper end ========== -->
-
+<div id="app">
+    <example-component></example-component>
     <div class="card-styles">
         <div class="card-style-3 mb-30">
             <div class="card-content">
@@ -24,6 +25,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 @section('script')
 @endsection
