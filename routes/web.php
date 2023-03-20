@@ -45,11 +45,6 @@ Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show a product 
 });
 
-// Route::view('/login', 'auth.login');
-// Route::view('/register', 'auth.register');
-// Route::view('/forgotPassword', 'auth.passwords.forgotPass');
-// Route::view('/resetPassword', 'auth.passwords.customerReset');
-
 Auth::routes(['verify' => true,]);
 
 // ============================== customer routes ===============================

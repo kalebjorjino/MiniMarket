@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="background-image: url('images/auth/SAMJ_LoginBG3.png'); background-position: center; background-repeat: no-repeat; background-size: cover;">
+<div class="bg-3">
     <div class="mx-auto" style="width: 600px;">
         <div class="signin-wrapper" style="background-color: transparent;">
             <div class="form-wrapper" style="margin:auto;">
