@@ -27,12 +27,14 @@
 </head>
 <body>
 
-    <div class="row g-0 auth-row vh-100">
+    <div id="app" class="row g-0 auth-row vh-100">
         @yield('content')
     </div>
 
     <!-- ========= All Javascript files linkup ======== -->
-    {{-- <script src="{{ asset('js/main.js') }}"></script> --}}
+    {{-- Custom Script --}}
+    <script src="{{ asset('js/main.js') }}"></script>
+    
     @vite('resources/js/app.js')
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </body>

@@ -25,6 +25,9 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/vue', function() {
+    return view('app');
+});
 
 
 // ============================== public routes ===============================
@@ -98,6 +101,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('products', ProductController::class, [
             'except' => ['show']
         ]);
+        Route::post('products/media', [ProductController::class, 'storeMedia'])->name('products.storeMedia');
 
         // CATEGORIES
         Route::resource('categories', CategoryController::class, [
@@ -113,6 +117,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('expenses', ExpenseController::class, [
             'except' => ['create', 'show']
         ]);
+        Route::get('getProduct', [ExpensesController::class, 'getProduct'])->name('getProduct');
 
 
         Route::view('about', 'admin.about')->name('about');
