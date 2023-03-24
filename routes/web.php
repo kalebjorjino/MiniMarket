@@ -50,6 +50,8 @@ Route::controller(MenuController::class)->prefix('menu')->group(function () {
 
 Auth::routes(['verify' => true,]);
 
+Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
 // ============================== customer routes ===============================
 
 // USER DASHBOARD
