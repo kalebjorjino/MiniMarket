@@ -45,12 +45,14 @@ Route::view('/help', 'storefront.help');
 // MENU
 Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show all products
+    Route::get('/', [MenuController::class, 'index'])->name('menu.index');
     // show a product 
+    Route::get('/{product}', [MenuController::class, 'show']);
 });
 
 Auth::routes(['verify' => true,]);
 
-Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // ============================== customer routes ===============================
 
@@ -119,7 +121,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('expenses', ExpenseController::class, [
             'except' => ['create', 'show']
         ]);
-        Route::get('getProduct', [ExpensesController::class, 'getProduct'])->name('getProduct');
+        Route::get('getProduct', [ExpenseController::class, 'getProduct'])->name('getProduct');
 
 
         Route::view('about', 'admin.about')->name('about');

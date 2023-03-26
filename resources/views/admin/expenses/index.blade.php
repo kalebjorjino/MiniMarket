@@ -32,6 +32,7 @@
         <!-- end row -->
     </div>
     @include('admin.expenses.create-expense')
+    @include('admin.expenses.update-expense')
 
     <!-- ========== title-wrapper end ========== -->
 
@@ -69,7 +70,7 @@
                                     <h6>Quantity</h6>
                                 </th>
                                 <th>
-                                    <h6>Total Price</h6>
+                                    <h6>Total Price (₱)</h6>
                                 </th>
                                 <th>
                                     <h6>Supplier</h6>
@@ -81,21 +82,36 @@
                             <!-- end table row-->
                         </thead>
                         <tbody>
-                            {{-- @foreach ($orders as $order)
+                            @foreach ($expenses as $expense)
                                 <tr>
                                     <td>
-                                        <p>{{ $order->id }}</p>
+                                        <p>{{ $expense->id }}</p>
                                     </td>
                                     <td>
-                                        <p>{{ $order->name }}</p>
+                                        <p>{{ $expense->expense_date }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $expense->product->category->name }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $expense->product->title }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $expense->quantity }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $expense->total_price }}</p>
+                                    </td>
+                                    <td>
+                                        <p>{{ $expense->supplier }}</p>
                                     </td>
                                     <td>
                                         <div class="flex justify-content-end">
                                             <button class="edit-btn" data-bs-target="#editModal" data-bs-toggle="modal"
-                                                data-id="{{ $order->id }}">
+                                                data-id="{{ $expense->id }}">
                                                 <i class="lni lni-pencil"></i>
                                             </button>
-                                            <button class="destroy delete-btn ml-8" data-id="{{ $order->id }}">
+                                            <button class="destroy delete-btn ml-8" data-id="{{ $expense->id }}">
                                                 <i
                                                     class="lni
                                             lni-trash-can"></i>
@@ -103,7 +119,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                             <!-- end table row -->
                         </tbody>
                     </table>
@@ -117,6 +133,23 @@
 @endsection
 
 @section('script')
+     {{-- SHOW MODAL IF ERROR --}}
+    @if ($errors->has('name') || $errors->has('description'))
+        <script>
+            $(document).ready(function() {
+                $('#createModal').modal('show');
+            });
+        </script>
+    @endif
+
+    @if ($errors->has('e_name') || $errors->has('e_description'))
+        <script>
+            $(document).ready(function() {
+                $('#editModal').modal('show');
+            });
+        </script>
+    @endif
+
     <script>
         // DATATABLES
         $(document).ready(function() {
@@ -124,6 +157,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
+                "aaSorting": [ ],
                 buttons: [{
                         extend: 'excelHtml5',
                         exportOptions: {
@@ -146,6 +180,7 @@
             }).buttons().container().appendTo('#data_table_wrapper .col-md-6:eq(0)');
         });
 
+
         // CREATE 
 
         // Set expense date by default
@@ -153,11 +188,12 @@
 
 
         // Load Category when Product Title is changed
-        $('#product_title').on('change', function(e) {
+        $('#product_id').change(function(e) {
             e.preventDefault();
 
-            var id = $(this).val();
+            var id = this.value;
 
+            console.log(id);
             $.ajax({
                 url: '{{ route('getProduct') }}',
                 method: 'get',
@@ -165,11 +201,83 @@
                     'search': id
                 },
                 success: function(res) {
-                    // $('#search_list').html(data);
-                    // console.log(res);
+                    console.log(res);
                     $("#category").val(res.category_id);
                 }
             });
+        });
+
+
+        // EDIT
+        $('#editModal').on('show.bs.modal', function(e) {
+            var button = $(e.relatedTarget) // Button that triggered the modal
+            var id = button.data('id') // Extract info from data-* attributes
+            var url = "{{ route('expenses.edit', ':id') }}".replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#e_expense_date').val(data.expense_date);
+                    $('#e_product_id').val(data.product_id);
+                    $('#e_category').val(data.product_id);
+                    $('#e_quantity').val(data.quantity);
+                    $('#e_total_price').val(data.total_price);
+                    $('#e_supplier').val(data.supplier);
+                    $('#edit-form').attr('action', "{{ route('expenses.update', ':id') }}".replace(
+                        ':id',
+                        id));
+                }
+            });
+        })
+
+        // DELETE  
+        var url = window.location.href;
+
+        $('body').on('click', '.destroy', function(e) {
+            e.preventDefault();
+            let id = $(this).data('id')
+            console.log(id);
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.delete(`${url}/${id}`).then(function(r) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            'The record has been deleted.',
+                            'success'
+                        )
+                    }).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action is cancelled',
+                        'error'
+                    )
+                }
+            })
         });
     </script>
 @endsection

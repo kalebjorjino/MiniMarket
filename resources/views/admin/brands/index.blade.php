@@ -114,7 +114,7 @@
 @endsection
 
 @section('script')
-    // SHOW MODAL IF ERROR
+     {{-- SHOW MODAL IF ERROR --}}
     @if ($errors->has('name') || $errors->has('description'))
         <script>
             $(document).ready(function() {
