@@ -28,8 +28,11 @@ class ProductController extends Controller
     // Store a record
     public function store(Request $request)
     {
-         $product = Product::create([
-            'title' => $request->title,
+        $data = $request->validate(['title' => ['required', 'string', 'unique:products']]);
+
+        $product = Product::create([
+            // 'title' => $request->title,
+            'title' => $data['title'],
             'description' => $request->description,
             'price' => $request->price,       
             'stocks' => $request->stocks,       
@@ -87,8 +90,10 @@ class ProductController extends Controller
         // $product->update($request->all());
         // $product->update($request->except('product_cover'));
 
-         $product->update([
-            'title' => $request->title,
+        $data = $request->validate(['title' => ['required', 'string', 'unique:products,title,'.$product->id]]);
+
+        $product->update([
+            'title' => $data['title'],
             'description' => $request->description,
             'price' => $request->price,       
             'stocks' => $request->stocks,       

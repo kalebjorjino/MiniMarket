@@ -38,7 +38,7 @@ class Product extends Model implements HasMedia
             $product->save();
         });
     }
-
+    
     public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);

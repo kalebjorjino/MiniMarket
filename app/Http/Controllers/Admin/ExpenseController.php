@@ -15,10 +15,9 @@ class ExpenseController extends Controller
     public function index() 
     {
         $expenses = Expense::all()->sortByDesc('created_at');
-        // return view('admin.expenses.index', ['expenses' => $expenses]);
-        
         $categories = Category::all();
         $products = Product::all();
+        
         return view('admin.expenses.index', ['products' => $products, 'categories' => $categories, 'expenses' => $expenses]);
     }
 
@@ -51,8 +50,8 @@ class ExpenseController extends Controller
     public function update(Request $request, Expense $expense)
     {
         // $expense->update($request->all()); 
-        // dd($request);
 
+        // stocks update
         if ( $expense->quantity >= $request->e_quantity) {
             $qty = $expense->quantity - $request->e_quantity;
             // decrement stock

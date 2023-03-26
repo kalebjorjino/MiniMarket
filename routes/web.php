@@ -47,7 +47,7 @@ Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show all products
     Route::get('/', [MenuController::class, 'index'])->name('menu.index');
     // show a product 
-    Route::get('/{product}', [MenuController::class, 'show']);
+    Route::get('/{product:slug}', [MenuController::class, 'show']);
 });
 
 Auth::routes(['verify' => true,]);
