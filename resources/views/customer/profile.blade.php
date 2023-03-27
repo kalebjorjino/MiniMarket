@@ -29,7 +29,7 @@
                             <hr>
                         </div>
 
-                        <form class="align-items-center" id="profileForm" method="POST" action='/profile'>
+                        <form class="align-items-center" id="profileForm" method="POST" action="/account/profile">
                             @csrf
                             @if (Session::has('success'))
                                 <div class="alert alert-success" role="alert">

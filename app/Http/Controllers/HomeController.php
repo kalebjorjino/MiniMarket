@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Rules\alpha_spaces;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -65,9 +67,9 @@ class HomeController extends Controller
     public function editProfile(Request $request){
 
         $request->validate([
-            'first_name' => ['required', 'alpha_spaces', 'max:255'],
-            'last_name' => ['required', 'alpha_spaces', 'max:255'],
-            'phone_number' => ['required', 'numeric', 'digits:11'],
+            'first_name' => ['required', 'max:255', new alpha_spaces],
+            'last_name' => ['required', 'max:255', new alpha_spaces],
+            'phone' => ['required', 'numeric', 'digits:11'],
         ]);
 
         $test = DB::table('users')

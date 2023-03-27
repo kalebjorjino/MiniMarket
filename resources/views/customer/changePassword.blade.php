@@ -1,19 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="/"><i class="fa fa-home"></i> Home</a>
-                        <span>Change Password</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
 
     <section class="pro-content">
 

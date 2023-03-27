@@ -62,9 +62,10 @@ Route::controller(HomeController::class)->prefix('account')->middleware('verifie
     Route::get('/orders', 'customer.orders');
     Route::get('/profile', 'profile');
     Route::get('/changePassword', 'changePassword');
+    Route::post('/profile', 'editProfile');
+    Route::post('/changepassword', 'updateChangePassword');
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
-
 
 // ================================ admin routes ================================
 Route::prefix('admin')->group(function () {

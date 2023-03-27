@@ -97,3 +97,15 @@ body{
 .profile-content .dashboard a:hover {
     color: #cc2e3a;
 }
+
+/* button */
+.site-btn {
+    color: #ffffff;
+    background: #2d32cd;
+    border: 1px solid #1d229b;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 11px 45px 11px;
+    cursor: pointer;
+}
