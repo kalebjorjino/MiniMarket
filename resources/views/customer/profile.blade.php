@@ -1,37 +1,14 @@
 @extends('layouts.app')
 @section('content')
-    {{-- <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <div class="container">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="./">{{ trans('lables.bread-crumb-home') }}</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ trans('lables.bread-profile') }}</li>
-                </ol>
-            </div>
-        </nav>
-    </div> --}}
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breadcrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="/"><i class="fa fa-home"></i> Home</a>
-                        <span>Profile</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section End -->
+<div class="bg-3">
 
     <section class="pro-content">
 
         <!-- Profile Content -->
         <section class="profile-content">
-            <div class="container">
+            <div class="container" style="background-color: white; border-radius: 25px; padding: 30px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            margin: 25px;">
                 <div class="row">
 
                     <div class="col-12 col-lg-3 mt-4">
@@ -115,6 +92,7 @@
                     </div>
                 </div>
             </div>
+</div>
         </section>
     </section>
 @endsection

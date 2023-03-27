@@ -38,6 +38,7 @@
                 onclick="event.preventDefault(); this.closest('form').submit();" class="nav-link ">
                 <i class="fas fa-right-from-bracket" style="padding: 5px;"></i>
                 Logout
+            </a>
         </form>
     </li>
 </ul>

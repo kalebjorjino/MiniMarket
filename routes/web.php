@@ -57,11 +57,11 @@ Auth::routes(['verify' => true,]);
 // ============================== customer routes ===============================
 
 // USER DASHBOARD
-Route::prefix('account')->middleware('verified')->group(function () {
-    Route::view('/dashboard', 'customer.dashboard');
-    Route::view('/orders', 'customer.orders');
-    Route::view('/profile', 'customer.profile');
-    Route::view('/changePassword', 'customer.changePassword');
+Route::controller(HomeController::class)->prefix('account')->middleware('verified')->group(function () {
+    Route::get('/dashboard', 'dashboard');
+    Route::get('/orders', 'customer.orders');
+    Route::get('/profile', 'profile');
+    Route::get('/changePassword', 'customer.changePassword');
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
 

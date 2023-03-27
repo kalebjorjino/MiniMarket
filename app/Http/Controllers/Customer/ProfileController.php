@@ -26,4 +26,5 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Your profile has been updated');
     }
+    
 }
