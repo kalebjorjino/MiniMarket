@@ -47,6 +47,15 @@ class CategoryController extends Controller
     {
         $record = Category::find($id);
         $record->name = $request->e_name;
+        
+        if($request->hasFile('e_category_icon')){
+            if ($record->category_icon) {
+                Storage::disk('public')->delete($record->category_icon);
+            }
+            $category_icon = Storage::disk('public')->put('/categories' . '/' . $id, $request->file('e_category_icon'));
+            $record->category_icon = $category_icon;
+        }
+        
         $record->save();
         return redirect()->route('categories.index')->with('success', 'Category updated successfully');
     }
@@ -55,6 +64,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $record = Category::findOrFail($id);
+        if($record->category_icon){
+            Storage::disk('public')->deleteDirectory('/categories' . '/' . $id);
+        }
         $record->delete(); 
         return response()->json([
             'status' => 200

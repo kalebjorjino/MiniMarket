@@ -10,7 +10,8 @@
             </div>
             <div class="modal-body">
 
-                <form id="edit-form" action="{{ route('categories.update', ':id') }}" method="POST">
+                <form id="edit-form" action="{{ route('categories.update', ':id') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -37,6 +38,16 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row my-3">
+                        <label for="e_category_icon" class="col-sm-3 col-form-label">Category Icon <span
+                                class="text-danger">*</span>
+                        </label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="file" id="e_category_icon" name="e_category_icon"
+                                accept=".png, .jpg, .jpeg">
                         </div>
                     </div>
 
