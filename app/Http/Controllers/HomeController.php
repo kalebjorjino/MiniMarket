@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 
 class HomeController extends Controller
@@ -57,6 +59,66 @@ class HomeController extends Controller
         $user = DB::table('users') 
             ->where('id', Auth::user()->id)
             ->first();
-        return view('customer..profile', ['user' => $user]);
+        return view('customer.profile', ['user' => $user]);
+    }
+
+    public function editProfile(Request $request){
+
+        $request->validate([
+            'first_name' => ['required', 'alpha_spaces', 'max:255'],
+            'last_name' => ['required', 'alpha_spaces', 'max:255'],
+            'phone_number' => ['required', 'numeric', 'digits:11'],
+        ]);
+
+        $test = DB::table('users')
+        ->where('email', $request->email)
+        ->update([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+        ]);
+        return redirect('/profile')->with('success', "Your profile has been successfully updated!");
+    }
+
+    // 
+    public function changePassword()
+    {
+        return view('customer.changePassword');
+    }
+
+    public function updateChangePassword(Request $request){
+
+         $request->validate([
+            'current_password' => 'required',
+         ]);
+     
+        $user = DB::table('users')
+            ->where('id', $request->id)
+            ->get();
+
+        if (!(Hash::check($request->current_password, $user[0]->password))) {   
+            return redirect('/changePassword')->with('error', "Your current password does not matches with the password you provided. Please try again.");
+
+        } 
+        elseif(strcmp($request->current_password, $request->new_password) == 0){
+            return redirect('/changePassword')->with("error","New Password cannot be same as your current password. Please choose a different password.");
+        } 
+        else {
+            $request->validate([
+            'new_password' => ['required', Password::min(8)
+            ->mixedCase()
+            ->numbers()
+            ->symbols(), 'confirmed']
+         ]);
+        }
+ 
+        DB::table('users')
+        ->where('id', $request->id)
+        ->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+        
+        return redirect('/changePassword')->with('success', 'Your password has been changed successfully!');
+    
     }
 }

@@ -61,7 +61,7 @@ Route::controller(HomeController::class)->prefix('account')->middleware('verifie
     Route::get('/dashboard', 'dashboard');
     Route::get('/orders', 'customer.orders');
     Route::get('/profile', 'profile');
-    Route::get('/changePassword', 'customer.changePassword');
+    Route::get('/changePassword', 'changePassword');
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
 
