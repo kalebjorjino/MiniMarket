@@ -27,9 +27,12 @@
 </head>
 <body>
 
+    @include('storefront.navbar')
     <div id="app" class="row g-0 auth-row vh-100">
         @yield('content')
     </div>
+    @include('storefront.footer')
+
 
     <!-- ========= All Javascript files linkup ======== -->
     {{-- Custom Script --}}
