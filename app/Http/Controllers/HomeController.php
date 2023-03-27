@@ -73,13 +73,14 @@ class HomeController extends Controller
         ]);
 
         $test = DB::table('users')
-        ->where('email', $request->email)
+        // ->where('email', $request->email)
+        ->where('id', Auth::user()->id)
         ->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'phone_number' => $request->phone_number,
+            'phone' => $request->phone,
         ]);
-        return redirect('/profile')->with('success', "Your profile has been successfully updated!");
+        return redirect('/account/profile')->with('success', "Your profile has been successfully updated!");
     }
 
     // 
@@ -99,11 +100,11 @@ class HomeController extends Controller
             ->get();
 
         if (!(Hash::check($request->current_password, $user[0]->password))) {   
-            return redirect('/changePassword')->with('error', "Your current password does not matches with the password you provided. Please try again.");
+            return redirect('/account/changePassword')->with('error', "Your current password does not matches with the password you provided. Please try again.");
 
         } 
         elseif(strcmp($request->current_password, $request->new_password) == 0){
-            return redirect('/changePassword')->with("error","New Password cannot be same as your current password. Please choose a different password.");
+            return redirect('/account/changePassword')->with("error","New Password cannot be same as your current password. Please choose a different password.");
         } 
         else {
             $request->validate([
@@ -120,7 +121,7 @@ class HomeController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
         
-        return redirect('/changePassword')->with('success', 'Your password has been changed successfully!');
+        return redirect('/account/changePassword')->with('success', 'Your password has been changed successfully!');
     
     }
 }

@@ -109,3 +109,8 @@ body{
     padding: 11px 45px 11px;
     cursor: pointer;
 }
+
+.site-btn:hover {
+    background: #191ea1;
+    color: #ffffff;
+}
