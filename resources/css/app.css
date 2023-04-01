@@ -794,3 +794,14 @@ h6 {
         width: 50%;
     }
 }
+
+/* divider */
+
+.divider {
+    height: 90px;
+    background-color: #ededed;
+    background-image: url("/public/images/bg/plain-red.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
