@@ -4,9 +4,10 @@
         <div class="top-nav container d-flex justify-content-between align-items-center">
 
             <div class="top-nav-social-links mt-2">
-                <a href="https://www.facebook.com/DongDigitalPhotoshop/" target="_blank"><i
+                <a href="https://www.facebook.com/samjkoreanminimart" target="_blank"><i
                         class="fa-brands fa-facebook pe-1"></i></a>
-                <a href="https://www.instagram.com/dongrelox/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://instagram.com/samjkoreanminimart" target="_blank"><i
+                        class="fa-brands fa-instagram"></i></a>
             </div>
 
             <div class="top-nav-items d-flex justify-content-between align-items-center my-2">
@@ -65,11 +66,10 @@
                                     href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('menu') ? 'active' : '' }}" href="/menu">Shop</a>
+                                <a class="nav-link {{ Request::is('menu') ? 'active' : '' }}" href="/menu">Menu</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {{ Request::is('about-us') ? 'active' : '' }}"
-                                    href="/about-us">About</a>
+                                <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('contact-us') ? 'active' : '' }}"

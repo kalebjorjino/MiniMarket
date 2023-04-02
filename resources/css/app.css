@@ -760,6 +760,17 @@ h6 {
     cursor: pointer;
 }
 
+.red-btn {
+    color: #ffffff;
+    background: #cd2e3a;
+    /* border: 1px solid #8f3035; */
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 11px 45px 11px;
+    cursor: pointer;
+}
+
 .dl-btn-grad {
     background-image: linear-gradient(
         to right,
@@ -797,11 +808,224 @@ h6 {
 
 /* divider */
 
-.divider {
+.divider-sec {
     height: 90px;
     background-color: #ededed;
     background-image: url("/public/images/bg/plain-red.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+/* Flat contact
+---------------------------------------------------------------*/
+/* .wrap-contact {
+    width: 100%;
+}
+
+.wrap-contact .contact-name,
+.wrap-contact .contact-email,
+.wrap-contact .contact-subject {
+    float: left;
+    width: 33.3333%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.wrap-contact .contact-message,
+.wrap-contact .form-submit {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.wrap-contact.style2 .contact-name input[type="text"],
+.wrap-contact.style2 .contact-email input[type="email"],
+.wrap-contact.style2 .contact-subject input[type="text"],
+.wrap-contact.style2 .contact-message textarea {
+    border: none;
+    border-bottom: 1px solid #ebebeb;
+    font-size: 18px;
+    line-height: 37px;
+    padding-left: 0px;
+}
+
+.wrap-contact.style2 .contact-name input[type="text"],
+.wrap-contact.style2 .contact-email input[type="email"],
+.wrap-contact.style2 .contact-subject input[type="text"] {
+    height: 37px;
+}
+
+.wrap-contact label {
+    font-size: 18px;
+    margin-bottom: 0px;
+    line-height: 18px;
+}
+
+.wrap-contact.style2 .contact-message {
+    margin-bottom: 33px;
+}
+
+.wrap-contact.style2 .contact-message textarea {
+    height: 84px;
+    padding: 38px 0px 0px 0px;
+}
+
+.wrap-contact.style2 input[type="text"]:focus,
+.wrap-contact.style2 input[type="email"]:focus,
+.wrap-contact.style2 textarea:focus {
+    border-bottom: 1px solid #f63440;
+}
+
+.wrap-contact .form-submit button {
+    padding: 7px 51px;
+    font-size: 18px;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrap-contact .contact-name,
+.wrap-contact .contact-email,
+.wrap-contact .contact-subject {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.flat-row.flat-iconbox {
+    padding: 35px 0px 0px 0px !important;
+} */
+
+/* Title section
+---------------------------------------------------------------*/
+.title-section {
+    position: relative;
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.title-section.margin_bottom_17 {
+    margin-bottom: 17px;
+}
+
+.title-section .title {
+    font-size: 32px;
+    line-height: 66px;
+    font-weight: 500;
+    color: #333333;
+    position: relative;
+}
+
+.title-section .title:before {
+    content: "";
+    width: 60px;
+    height: 2.5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #f63440;
+    margin: 0 auto;
+}
+
+.title-section.width-before-17 .title:before {
+    width: 17%;
+}
+
+.title-section.bg-before-white .title:before {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.title-section .sup-title {
+    font-size: 24px;
+    line-height: 26px;
+    color: #333;
+    font-weight: 200;
+}
+
+.title-section .sub-title {
+    font-size: 18px;
+    line-height: 56px;
+    color: #6e6e6e;
+    font-weight: 300;
+}
+
+/* Page title
+---------------------------------------------------------------*/
+.page-title {
+    position: relative;
+    padding: 76px 0px 77px 0px;
+    text-align: center;
+}
+
+.page-title .page-title-heading .title {
+    margin-bottom: 23px;
+}
+
+/* Breadcrumbs
+---------------------------------------------------------------*/
+.breadcrumbs ul li {
+    display: inline-block;
+    position: relative;
+    margin: 0px 9px 0px 7px;
+}
+
+.breadcrumbs ul li:before {
+    content: ">";
+    position: absolute;
+    top: 0;
+    right: -12px;
+}
+
+.breadcrumbs ul li:last-child:before {
+    content: "";
+    background-color: transparent;
+}
+
+.breadcrumbs ul li a {
+    color: #6e6e6e;
+    font-weight: 400;
+}
+
+.breadcrumbs ul li a:hover {
+    color: #f63440;
+}
+
+/* Parallax
+---------------------------------------------------------------*/
+.parallax {
+    width: 100%;
+    background-attachment: fixed;
+    background-position: 50% 0;
+}
+
+.parallax .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.parallax1 {
+    /* background-image: url("../images/parallax/bg-parallax1.jpg"); */
+    background-image: url("/public/images/bg/plain-blue.png");
+}
+
+/* Flat map
+---------------------------------------------------------------*/
+.flat-map {
+    height: 383px;
+    position: relative;
+    overflow: hidden;
+}
+
+.infobox {
+    background: #ffffff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+    padding: 15px 30px;
+    width: 230px;
+}
+
+.infobox p {
+    color: #333333;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 22px;
 }

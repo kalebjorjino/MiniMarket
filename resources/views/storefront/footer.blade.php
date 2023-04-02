@@ -1,10 +1,12 @@
-  <section class="divider">
+  <section class="divider-sec">
       <div class="container">
           <div class="row">
-              {{--  --}}
+
           </div>
       </div>
-  </section><!-- /.mail-chimp -->
+  </section>
+
+
   <footer class="footer-14398">
 
       <div class="container ">
@@ -47,13 +49,13 @@
               </div>
               <div class="col ">
                   <ul class="list-unstyled d-flex social justify-content-end">
-                      <li><a class="link-dark"href="/privacy-policy">Privacy</a></li>
-                      <li><a class="link-dark"href="/terms-conditions">Terms</a></li>
+                      <li><a class="link-dark"href="javascript:void(0)">Privacy</a></li>
+                      <li><a class="link-dark"href="javascript:void(0)">Terms</a></li>
                       {{-- <li class="ms-3"><a class="link-dark"href="#">Code of Conduct</a></li> --}}
-                      <li><a class="link-dark" href="https://www.facebook.com/DongDigitalPhotoshop/" target="_blank"><i
+                      <li><a class="link-dark" href="https://www.facebook.com/samjkoreanminimart" target="_blank"><i
                                   class="fa-brands fa-facebook fa-lg"></i></a>
                       </li>
-                      <li><a class="link-dark" href="https://www.instagram.com/dongrelox/" target="_blank"><i
+                      <li><a class="link-dark" href="https://instagram.com/samjkoreanminimart" target="_blank"><i
                                   class="fa-brands fa-instagram fa-lg"></i></a>
                       </li>
                   </ul>

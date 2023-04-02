@@ -35,7 +35,7 @@
 <body>
 
     @include('storefront.navbar')
-    <div id="app" class="row g-0 auth-row vh-100">
+    <div id="app" class="row g-0 auth-row min-vh-100">
         @yield('content')
     </div>
     @include('storefront.footer')
@@ -47,6 +47,7 @@
 
     @vite(['resources/js/app.js', 'resources/js/script.js'])
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    @yield('script')
 </body>
 
 </html>
