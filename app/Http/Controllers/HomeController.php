@@ -55,6 +55,20 @@ class HomeController extends Controller
        );
     }
 
+    // Order Tracker
+    // public function ordersTrack()
+    // {
+    //     $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
+    //     return view('customer.orders', [
+    //         'orders' => json_encode($orders)
+    //     ]);
+    // }
+
+    // public function orderShow()
+    // {
+    //     return view('customer.orders-show');
+    // }
+
     // My Profile
     public function profile()
     {

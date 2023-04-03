@@ -99,55 +99,32 @@
                 </div><!-- /.row -->
                 <div class="row">
                     <div class="wrap-contact">
-                        {{-- <form novalidate="" class="contact-form" id="contactform" method="post" action="#">
-                            <div class="row">
-                                <div class="form-text-wrap clearfix">
 
-                                    <div class="col-lg-4">
-                                        <div class="contact-name clearfix">
-                                            <label>Name</label>
-                                            <input type="text" aria-required="true" size="30" value=""
-                                                name="author" id="author">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
+                        @if (Session::has('success'))
+                            <div class="alert alert-success fw-normal" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+                        @if (Session::has('error'))
+                            <div class="alert alert-danger fw-normal" role="alert">
+                                {{ session('error') }}
 
-                                        <div class="contact-email">
-                                            <label>Email</label>
-                                            <input type="email" size="30" value="" name="email"
-                                                id="email">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
+                            </div>
+                        @endif
 
-                                        <div class="contact-subject">
-                                            <label>Subject</label>
-                                            <input type="text" aria-required="true" size="30" value=""
-                                                name="subject" id="subject">
-                                        </div>
-                                    </div>
-                                </div>
+                        <form action="/contact-us" method="POST" class="comment-form">
+                            @csrf
 
-                                <div class="contact-message clearfix margin-top-40">
-                                    <label>Message</label>
-                                    <textarea class="" tabindex="4" name="message" required></textarea>
-                                </div>
-                                <div class="form-submit margin-top-32 ">
-                                    <button class="contact-submit">SEND</button>
-                                </div>
-                        </form> --}}
-
-                        <form action="#" class="comment-form">
                             <div class="row mt-4">
                                 <div class="col-lg-6 mt-4">
                                     <input type="text" id="name" name="name" placeholder="Your name">
                                 </div>
                                 <div class="col-lg-6 mt-4">
-                                    <input type="text" id="email" name="name" placeholder="Your email">
+                                    <input type="email" id="email" name="email" placeholder="Your email">
                                 </div>
                                 <div class="col-lg-12 mt-4">
-                                    <textarea placeholder="Your message" name="name" id="message"></textarea>
-                                    <button type="button" id="submit" name="name" class="red-btn mt-4">Send
+                                    <textarea placeholder="Your message" name="message" id="message"></textarea>
+                                    <button type="button" id="submit" class="red-btn mt-4">Send
                                         message</button>
                                 </div>
                             </div>
@@ -160,33 +137,44 @@
 @endsection
 @section('script')
     <script>
-        $("#submit").click(function() {
-            const name = $("#name").val()
-            const email = $("#email").val()
-            const message = $("#message").val()
-            if (name == "" || email == "" || message == "") {
-                swal({
-                    icon: "error",
-                    title: "Error!",
-                    text: "All fields are required!"
-                })
-            } else {
-                const formdata = new FormData()
-                formdata.append("name", name)
-                formdata.append("email", email)
-                formdata.append("message", message)
+        // $("#submit").click(function() {
+
+        // $('body').on('click', '#submit', function(e) {
+        //     e.preventDefault();
+        //     const name = $("#name").val()
+        //     const email = $("#email").val()
+        //     const message = $("#message").val()
+
+        //     const swalWithBootstrapButtons = Swal.mixin({
+        //         customClass: {
+        //             confirmButton: 'btn btn-success mx-2',
+        //             cancelButton: 'btn btn-danger'
+        //         },
+        //         buttonsStyling: false
+        //     })
+
+        //     if (name == "" || email == "" || message == "") {
+        //         swalWithBootstrapButtons.fire({
+        //             icon: "error",
+        //             title: "Error!",
+        //             text: "All fields are required!"
+        //         })
+        //     } else {
+        //         const formdata = new FormData()
+        //         formdata.append("name", name)
+        //         formdata.append("email", email)
+        //         formdata.append("message", message)
 
 
-                axios.post("/contact-us", formdata).then(response => {
-                    console.log(response.data)
-                    swal({
-                        icon: "success",
-                        title: "Success!",
-                        text: "Your inquiry has been submitted successfully!"
-                    })
-                })
-            }
-
-        })
+        //         axios.post("/contact-us", formdata).then(response => {
+        //             console.log(response.data)
+        //             swalWithBootstrapButtons.fire({
+        //                 icon: "success",
+        //                 title: "Success!",
+        //                 text: "Your inquiry has been submitted successfully!"
+        //             })
+        //         })
+        //     }
+        // })
     </script>
 @endsection

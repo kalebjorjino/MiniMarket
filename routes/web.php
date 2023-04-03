@@ -34,7 +34,7 @@ Route::get('/vue', function() {
 Route::controller(StorefrontController::class)->group(function(){
     Route::get('/', 'index'); // home
     Route::get('/contact-us', 'contact')->name('contact.show');
-    Route::post('contact-us', 'contactSend')->name('contact.send');
+    Route::post('/contact-us', 'contactSend')->name('contact.send');
 });
 
 Route::view('/about', 'storefront.about');

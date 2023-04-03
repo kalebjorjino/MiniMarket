@@ -19,13 +19,14 @@ class StorefrontController extends Controller
         return view('storefront.contact.contact-us');
     }
 
-    public function contactSend(Request $request){
-
+    public function contactSend(Request $request)
+    {
+        dd($request);
         // Validate the form data
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required|email',
-            'message' => 'required',
+            'message' => 'required|string',
         ]);
 
         // Get the form data
