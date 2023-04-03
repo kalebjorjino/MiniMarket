@@ -1,16 +1,15 @@
 @extends('layouts.app')
 @section('content')
-
-    <section class="pro-content">
+    <section class="pro-content bg-3">
 
         <!-- Profile Content -->
         <section class="profile-content">
-            <div class="container">
+            <div class="container bg-dashboard mx-auto">
                 <div class="row">
                     <div class="col-12 col-lg-3 mt-4">
                         <div class="heading">
                             <h2>
-                                My Account
+                                Account
                             </h2>
                             <hr>
                         </div>
@@ -81,8 +80,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit"
-                                class="btn site-btn button_hover mt-2 float-right">SUBMIT</button>
+                            <button type="submit" class="btn site-btn button_hover mt-2 float-right">SUBMIT</button>
                         </form>
                     </div>
                 </div>

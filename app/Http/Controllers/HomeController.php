@@ -64,25 +64,25 @@ class HomeController extends Controller
         return view('customer.profile', ['user' => $user]);
     }
 
-    public function editProfile(Request $request){
-
+    public function editProfile(Request $request)
+    {
         $request->validate([
             'first_name' => ['required', 'max:255', new alpha_spaces],
             'last_name' => ['required', 'max:255', new alpha_spaces],
             'phone' => ['required', 'numeric', 'digits:11'],
+            'address' => ['required', 'string',  'max:255'],
         ]);
 
-        $test = DB::table('users')
-        ->where('email', $request->email)
-        ->update([
+        DB::table('users')->where('email', $request->email)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'phone_number' => $request->phone_number,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ]);
-        return redirect('/profile')->with('success', "Your profile has been successfully updated!");
+
+        return redirect('/account/profile')->with('success', "Your profile has been successfully updated!");
     }
 
-    // 
     public function changePassword()
     {
         return view('customer.changePassword');
