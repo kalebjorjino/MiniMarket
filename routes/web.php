@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\UserController;
@@ -45,10 +46,40 @@ Route::view('/help', 'storefront.help');
 // MENU
 Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show all products
-    Route::get('/', [MenuController::class, 'index'])->name('menu.index');
+    Route::get('/', 'index')->name('menu.index');
     // show a product 
-    Route::get('/{product:slug}', [MenuController::class, 'show']);
+    Route::get('/{product:slug}', 'show');
 });
+
+Route::post('/addtocart', [CartController::class, 'addToCart']);
+
+// CART
+Route::controller(CartController::class)->prefix('cart')->group(function () {
+    Route::get('/','cartPage'); // cart
+    Route::post('/delete','delete');
+    Route::post('/update','update');
+    Route::post('/request','requestOrder');
+    Route::post('/data','cartData');
+});
+
+Route::controller(CartController::class)->prefix('checkout')->group(function () {
+    // Route::get('/', 'checkout'); // di ata need to? 
+    Route::get('/order-success/{tracking}', 'orderSuccess');
+});
+
+
+// Route::get('/shop/shopping-cart', [ProductsController::class, 'cartPage']);
+// Route::get('/shop/checkout', [ProductsController::class, 'checkout']);
+// Route::get('/shop/checkout/order-success/{tracking}', [ProductsController::class, 'orderSuccess']);
+// Route::get('/shop/product-detail/{id}', [ProductsController::class, 'productDetail']);
+
+// Route::post('/payment/delete', [ProductsController::class, 'delete']); // ??? 
+// Route::get('/cart/order/checkout/{tracking}', [CartController::class, 'checkoutOrder']);
+// Route::post('/cart/order/payment/{tracking}', [CartController::class, 'paymentOrder']);
+// Route::get('/cart/order/payment/success/{tracking}', [CartController::class, 'paymentOrderSuccess']);
+
+
+
 
 Auth::routes(['verify' => true,]);
 
@@ -98,9 +129,15 @@ Route::prefix('admin')->group(function () {
         ]);
 
         // ORDERS
-        Route::resource('orders', OrderController::class, [
-            'except' => ['create', 'show']
-        ]);
+        // Route::resource('orders', OrderController::class, [
+        //     'except' => ['create', 'show']
+        // ]);
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{tracking}', [OrderController::class, 'show']);
+
+
+        // Route::get('/admin/print', [PrintController::class, 'index']);
+        // Route::get('/admin/print/order/details/{tracking}', [PrintController::class, 'orderDetails']);
 
         // PRODUCTS
         Route::resource('products', ProductController::class, [

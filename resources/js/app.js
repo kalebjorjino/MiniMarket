@@ -11,6 +11,10 @@ import { createApp } from "vue";
 // import VueLazyload from "vue-lazyload";
 
 // Vue.use(VueLazyload);
+// import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+// Vue.use(BootstrapVue)
+// Vue.use(BootstrapVueIcons)
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
