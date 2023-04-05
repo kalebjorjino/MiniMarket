@@ -540,7 +540,7 @@ body {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     margin: 25px;
-    min-height: 450px;
+    min-height: 500px;
 }
 
 /*---------------------
@@ -569,6 +569,42 @@ body {
 .account-side-menu a::after,
 .account-side-menu a:active {
     color: #2d3292;
+}
+
+/*---------------------
+  My Orders
+-----------------------*/
+
+.filters .nice-select {
+    display: inline;
+    float: none;
+    padding: 10px 20px 10px 15px;
+    margin-left: 1rem;
+}
+
+/* 
+.order-history span {
+    font-weight: normal;
+    padding: 0.25em 0.625em;
+    border-radius: 0.175rem;
+} */
+
+.order-history table tbody tr:last-child > * {
+    border-bottom-color: inherit;
+    padding-bottom: 0px;
+}
+.order-history table tbody tr:first-child > * {
+    padding-top: 0px;
+}
+.order-history .page-link.active,
+.active > .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #2e32cd;
+    border-color: #2e32cd;
+}
+.page-link {
+    font-size: 0.9rem;
 }
 
 /*---------------------
@@ -885,7 +921,6 @@ body {
 .black-btn:hover:before {
     width: 100%;
 }
-
 
 .view-btn {
     color: #ffffff;

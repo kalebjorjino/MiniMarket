@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Payment;
 use App\Rules\alpha_spaces;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -51,11 +52,17 @@ class HomeController extends Controller
         // $orders = DB::table('carts')->where(['user_id' => $id, 'inPayment' => 1])
         // ->count();
         
-            return view('customer.dashboard', ['user' => $user]
-       );
+        return view('customer.dashboard', ['user' => $user]);
     }
 
     // Order Tracker
+    public function orders()
+    {
+        $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
+        return view('customer.orders', ['orders' => $orders]);
+    }
+
+
     // public function ordersTrack()
     // {
     //     $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
