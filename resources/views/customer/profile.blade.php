@@ -116,66 +116,6 @@
 
                         </div>
 
-                        <form class="align-items-center" id="profileForm" method="POST" action="/account/profile">
-                            @csrf
-                            @if (Session::has('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                            <div class="form-group row">
-                                <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
-                                <div class="col-sm-10">
-                                    <!-- insert input here -->
-                                    <input type="text" class="form-control @error('first_name') is-invalid @enderror"
-                                        id="first_name" placeholder="First Name" name='first_name'
-                                        value="{{ $user->first_name }}">
-                                    @error('first_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="last_name" class="col-sm-2 col-form-label">Last Name</label>
-                                <div class="col-sm-10">
-                                    <!-- insert input here -->
-                                    <input type="text" class="form-control  @error('last_name') is-invalid @enderror"
-                                        id="last_name" placeholder="Last Name" name='last_name'
-                                        value="{{ $user->last_name }}">
-                                    @error('last_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="phone" class="col-sm-2 col-form-label">Phone Number</label>
-                                <div class="col-sm-10">
-                                    <!-- insert input here -->
-                                    <input type="text" class="form-control @error('phone') is-invalid @enderror"
-                                        id="phone" placeholder="Phone Number" name='phone'
-                                        value="{{ $user->phone }}">
-                                    @error('phone')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <!-- insert input here -->
-                            {{-- <input type="text" class="d-none" name="email"> --}}
-                            <button type="submit"
-                                class="btn site-btn button_hover mt-2 saveProfile float-right">SAVE
-                                CHANGES</button>
-
-                        </form>
-
                     </div>
                 </div>
             </section>
