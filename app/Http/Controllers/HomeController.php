@@ -55,6 +55,20 @@ class HomeController extends Controller
        );
     }
 
+    // Order Tracker
+    // public function ordersTrack()
+    // {
+    //     $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
+    //     return view('customer.orders', [
+    //         'orders' => json_encode($orders)
+    //     ]);
+    // }
+
+    // public function orderShow()
+    // {
+    //     return view('customer.orders-show');
+    // }
+
     // My Profile
     public function profile()
     {
@@ -64,26 +78,25 @@ class HomeController extends Controller
         return view('customer.profile', ['user' => $user]);
     }
 
-    public function editProfile(Request $request){
-
+    public function editProfile(Request $request)
+    {
         $request->validate([
             'first_name' => ['required', 'max:255', new alpha_spaces],
             'last_name' => ['required', 'max:255', new alpha_spaces],
             'phone' => ['required', 'numeric', 'digits:11'],
+            'address' => ['required', 'string',  'max:255'],
         ]);
 
-        $test = DB::table('users')
-        // ->where('email', $request->email)
-        ->where('id', Auth::user()->id)
-        ->update([
+        DB::table('users')->where('email', $request->email)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'phone' => $request->phone,
+            'address' => $request->address,
         ]);
+
         return redirect('/account/profile')->with('success', "Your profile has been successfully updated!");
     }
 
-    // 
     public function changePassword()
     {
         return view('customer.changePassword');
@@ -93,6 +106,9 @@ class HomeController extends Controller
 
          $request->validate([
             'current_password' => 'required',
+            'new_password' => 'required',
+            'new_password_confirmation' => 'required',
+
          ]);
      
         $user = DB::table('users')
@@ -100,11 +116,11 @@ class HomeController extends Controller
             ->get();
 
         if (!(Hash::check($request->current_password, $user[0]->password))) {   
-            return redirect('/account/changePassword')->with('error', "Your current password does not matches with the password you provided. Please try again.");
+            return redirect('/account/change-password')->with('error', "Your current password does not matches with the password you provided. Please try again.");
 
         } 
         elseif(strcmp($request->current_password, $request->new_password) == 0){
-            return redirect('/account/changePassword')->with("error","New Password cannot be same as your current password. Please choose a different password.");
+            return redirect('/account/change-password')->with("error","New Password cannot be same as your current password. Please choose a different password.");
         } 
         else {
             $request->validate([
@@ -121,7 +137,7 @@ class HomeController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
         
-        return redirect('/account/changePassword')->with('success', 'Your password has been changed successfully!');
+        return redirect('/account/change-password')->with('success', 'Your password has been changed successfully!');
     
     }
 }

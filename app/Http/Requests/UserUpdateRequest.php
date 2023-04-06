@@ -26,6 +26,7 @@ class UserUpdateRequest extends FormRequest
             'e_first_name' => ['required', 'string', 'max:255', new alpha_spaces],
             'e_last_name' => ['required', 'string', 'max:255', new alpha_spaces],
             'e_phone_number' => ['required', 'numeric', 'digits:11'],
+            'e_address' => ['required', 'string',  'max:255'],
             'e_email' => ['required', 'email', 'string', 'max:255','unique:users,email,'.$this->user],
             'e_pass' => ['nullable', 'string', 'confirmed'],
         ];
@@ -43,6 +44,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'e_first_name' => 'first name',
             'e_last_name' => 'last name',
+            'e_phone_number' => 'phone number',
+            'e_address' => 'address',
             'e_email' => 'email address',
             'e_pass' => 'password',
         ];

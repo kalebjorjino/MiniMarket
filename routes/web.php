@@ -34,7 +34,7 @@ Route::get('/vue', function() {
 Route::controller(StorefrontController::class)->group(function(){
     Route::get('/', 'index'); // home
     Route::get('/contact-us', 'contact')->name('contact.show');
-    Route::post('contact-us', 'contactSend')->name('contact.send');
+    Route::post('/contact-us', 'contactSend')->name('contact.send');
 });
 
 Route::view('/about', 'storefront.about');
@@ -59,11 +59,11 @@ Auth::routes(['verify' => true,]);
 // USER DASHBOARD
 Route::controller(HomeController::class)->prefix('account')->middleware('verified')->group(function () {
     Route::get('/dashboard', 'dashboard');
-    Route::get('/orders', 'customer.orders');
+    Route::get('/orders', 'orders')->name('customer.orders');
     Route::get('/profile', 'profile');
-    Route::get('/changePassword', 'changePassword');
     Route::post('/profile', 'editProfile');
-    Route::post('/changepassword', 'updateChangePassword');
+    Route::get('/change-password', 'changePassword');
+    Route::post('/change-password', 'updateChangePassword');
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
 

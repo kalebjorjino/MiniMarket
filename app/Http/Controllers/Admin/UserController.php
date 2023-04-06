@@ -25,6 +25,7 @@ class UserController extends Controller
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'phone' => $request->phone_number,
+            'address' => $request->address,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -47,6 +48,7 @@ class UserController extends Controller
         $user->first_name = $request->input('e_first_name');
         $user->last_name  = $request->input('e_last_name');
         $user->phone = $request->input('e_phone_number');
+        $user->address = $request->input('e_address');
         $user->email = $request->input('e_email');
         if ($request->input('e_password') != NULL) {
              $user->password =  Hash::make($request->e_password);

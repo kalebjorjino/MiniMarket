@@ -1,16 +1,15 @@
 @extends('layouts.app')
 @section('content')
-
-    <section class="pro-content">
+    <section class="pro-content bg-3">
 
         <!-- Profile Content -->
         <section class="profile-content">
-            <div class="container">
+            <div class="container bg-dashboard mx-auto">
                 <div class="row">
                     <div class="col-12 col-lg-3 mt-4">
                         <div class="heading">
                             <h2>
-                                My Account
+                                Account
                             </h2>
                             <hr>
                         </div>
@@ -25,19 +24,21 @@
                             <hr>
                         </div>
 
-                        <form class="align-items-center" method="POST" action="/changepassword">
+                        <form class="align-items-center p-1" method="POST" action="/account/change-password">
                             @csrf
                             @if (Session::has('success'))
-                                <div class="alert alert-success" role="alert">
+                                <div class="alert alert-success fw-normal" role="alert">
                                     {{ session('success') }}
                                 </div>
                             @endif
                             @if (Session::has('error'))
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-danger fw-normal" role="alert">
                                     {{ session('error') }}
 
                                 </div>
                             @endif
+                            <input type="text" value="{{ Auth::user()->id }}" class="d-none" name="id">
+
                             <div class="form-group row">
                                 <label for="current_password" class="col-sm-3 col-form-label">Current Password </label>
                                 <div class="col-sm-9">
@@ -81,8 +82,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit"
-                                class="btn site-btn button_hover mt-2 float-right">SUBMIT</button>
+                            <button type="submit" class="btn site-btn button_hover mt-2 float-right">SUBMIT</button>
                         </form>
                     </div>
                 </div>
