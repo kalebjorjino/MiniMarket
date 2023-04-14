@@ -6,7 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ config('app.name', 'SAM-J K-MART') }}</title>
+    <title>{{  'SAM-J KMART | ADMIN' }}</title>
+    <link rel="icon" href="{{ URL::asset('images/favicon.png') }}" type="image/x-icon" />
+
 
     <!-- ========== All CSS files linkup ========= -->
     <link rel="stylesheet" href="{{ asset('css/lineicons.css') }}" />

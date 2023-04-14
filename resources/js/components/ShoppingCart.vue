@@ -4,9 +4,13 @@
         color: white !important;
     }
 
-    .update-btn:disabled, .update-btn:hover, .proceed-btn:disabled{
+    .update-btn:disabled, .proceed-btn:disabled{
         background-color: #f3f3f3 !important;
         color: black !important;
+    }
+
+    .proceed-btn:disabled:before, .update-btn:disabled:before {
+        background-color: #f3f3f3 !important;
     }
 </style>
 
@@ -129,7 +133,7 @@
                             </div>
                         </td>
 
-                        <td class="total-price first-row" id="total-price">{{ parseInt(cart.qty) * parseInt(cart.product.price)}}</td>
+                        <td class="total-price first-row" id="total-price">{{ parseFloat(cart.product.price) * parseInt(cart.qty) }}</td>
                         <td class="close-td first-row" @click="deleteCart(ind, cart.id)"><i class="fas fa-xmark"></i></td>
                     </tr>
                 </tbody>
@@ -171,9 +175,10 @@
                     <!-- <button @click="proceed()" :disabled="canProceed" class="proceed-btn">PROCEED TO CHECK OUT <span class="text-danger" v-if="canProceed"> *Total quantity of order must be 12 or more</span></button> -->
 
                     <!-- <button @click="requestOrder()" class="proceed-btn">PROCEED TO CHECK OUT</button> -->
-                    <button :disabled="isLoading" @click="requestOrder()" class="proceed-btn">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button>
 
+                    <!-- <button :disabled="isLoading || !canUpdate" @click="requestOrder()" class="proceed-btn mt-2">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button> -->
 
+                    <button :disabled="isLoading || !canUpdate" @click="proceedCheckout()" class="proceed-btn mt-2">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button>
                 </div>
             </div>
         </div>
@@ -277,6 +282,9 @@
                     qty: data.cart.quantity,
                     ind: ind,
                     // cover: data.cart.product.product_cover
+
+                    stocks: data.cart.product.stocks,
+
                 }
 
                 
@@ -298,7 +306,7 @@
                 let length = this.carts.length
                 let old = []
 
-                for(let i =0; i < length; i++){
+                for(let i = 0; i < length; i++){
                     carts.push({
                         id: this.carts[i].id,
                         qty: this.carts[i].qty,
@@ -365,7 +373,7 @@
                         })
                         
                         // let url = self.uid > 0 ? '/shop/checkout/order-success/'+res.data.tracking : (self.uid == 0 ? '/pos/checkout/order-success/'+res.data.tracking : '/staff/pos/checkout/order-success/'+res.data.tracking)
-                        let url = '/checkout/order-success/'+res.data.tracking 
+                        let url = '/cart/checkout/order-success/'+res.data.tracking 
 
                         window.location.href = url
                     }
@@ -381,7 +389,10 @@
             
             checkQty(ind){
                 if(/^\d*\.?\d*$/.test(this.carts[ind].qty)){
-                    if(parseInt(this.carts[ind].qty) <= 0)  this.carts[ind].qty = 1
+                    if (parseInt(this.carts[ind].qty) <= 0) this.carts[ind].qty = 1
+                    if (this.carts[ind].qty >= this.carts[ind].stocks) {
+                        this.carts[ind].qty = this.carts[ind].stocks;
+                    }
                 }
                 else{
                     this.carts[ind].qty = 1
@@ -391,6 +402,10 @@
             getImageUrl(path) {
                 return `${window.location.protocol}//${window.location.hostname}/storage/${path}`;
             },
+
+            proceedCheckout() {
+                window.location.href = '/cart/checkout';
+            }
 
 
             // hexToColorName(hex){ return ntc.name(hex)[1]; },
@@ -428,32 +443,32 @@
                     if(this.oldQty[i] != this.carts[i].qty) return false
                 }
                 
-                
                 return true
             },
 
-            canProceed(){
-                let length = this.oldQty.length
-                let count = 0
+            // canProceed(){
+            //     let length = this.oldQty.length
+            //     let count = 0
 
-                for(let i = 0; i < length ; i++){
-                    count += parseInt(this.oldQty[i])
-                }
+            //     for(let i = 0; i < length ; i++){
+            //         count += parseInt(this.oldQty[i])
+            //     }
 
-                if(count >= 12) return false
+            //     if(count >= 12) return false
 
-                return true
-            },
+            //     return true
+            // },
 
             total(){
                 let total = 0
                 let length = this.carts.length
 
                 for(let i =0; i < length; i++){
-                    let print = 0
+                    // let print = 0
 
                     // if(this.carts[i].print_color == 'Colored') print = parseInt(this.carts[i].product.print_price)
-                    total += parseInt(this.carts[i].product.price) * parseInt(this.carts[i].qty) + print*parseInt(this.carts[i].qty)
+                    // total += parseInt(this.carts[i].product.price) * parseInt(this.carts[i].qty) + print*parseInt(this.carts[i].qty)
+                    total += parseFloat(this.carts[i].product.price) * parseInt(this.carts[i].qty)
                 }
 
                 return total;
@@ -467,8 +482,6 @@
             data.forEach(this.populateCart)
 
             console.log(this.carts)
-
-
         }
     } 
 </script>

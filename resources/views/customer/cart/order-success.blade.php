@@ -1,7 +1,7 @@
    @extends('layouts.app')
 
    @section('content')
-       <section class="order-success text-center mt-5">
+       <section class="order-success text-center my-5">
            <div class="container ">
                <div class="row justify-content-center ">
                    <div class="col-xs-10 col-md-8">
@@ -12,9 +12,9 @@
 
                    <div class="col-lg-10 mt-4" style="background-color: #EDEDED; padding: 2.75rem 5rem;">
                         <div class="d-flex  flex-column  align-items-start mb-2 fw-normal">
-                            <p><span class="fw-bold">Order No.:</span> {{$payment->trackingnumber}} </p>
-                            <p><span class="fw-bold">Order Date:</span> {{$payment->created_at}} </p>
-                            <p><span class="fw-bold">Status:</span> {{$payment->status}} </p>
+                            <p><span class="text-dark fw-bold">Order No.:</span> {{$payment->trackingnumber}} </p>
+                            <p><span class="text-dark fw-bold">Order Date:</span> {{$payment->created_at}} </p>
+                            <p><span class="text-dark fw-bold">Status:</span> {{$payment->status}} </p>
                         </div>
 
                         <table class="table table-bordered">

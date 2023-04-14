@@ -28,9 +28,9 @@
                                     <hr>
                                 </div>
 
-                                <!-- order table -->
+                                <!-- sort filter -->
 
-                                <div class="filters">
+                                {{-- <div class="filters">
                                     <span class="fw-bold text-muted"><small>Sort orders: </small></span>
                                     <select id="fetchval" name="fetchval" aria-label="Default select" class=""
                                         required>
@@ -40,13 +40,17 @@
                                         <option value="3">Completed</option>
                                         <option value="4">Canceled</option>
                                     </select>
-                                </div>
+                                </div> --}}
+
+
+                                <!-- order table -->
+
                                 <div id="data_table_wrapper" class="order-history table-responsive fw-normal">
                                     <table id="data_table" class="table table-hover  mb-0">
                                         <thead>
                                             <tr>
                                                 <th>Order no.</th>
-                                                <th>Date Ordered</th>
+                                                <th>Order Date</th>
                                                 <th>Status</th>
                                                 <th>Total</th>
                                                 <th data-orderable="false">Action</th>
@@ -115,6 +119,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
+                "aaSorting": [],
             })
         });
     </script>

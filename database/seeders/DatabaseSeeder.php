@@ -29,6 +29,11 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123')
         ]);
 
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+
         Category::create(['name' => 'Beverage']);
         Category::create(['name' => 'Noodles']);
         Category::create(['name' => 'Condiments']);

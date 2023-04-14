@@ -39,13 +39,15 @@
 
 <body>
 
-    @include('storefront.navbar')
-    <div id="app" class="row g-0 auth-row min-vh-100">
-        @yield('content')
+    <div class="min-vh-100">
+        @include('storefront.navbar')
+
+        <div id="app" class="row g-0 auth-row ">
+            @yield('content')
+        </div>
+        @include('storefront.footer')
+
     </div>
-    @include('storefront.footer')
-
-
     <!-- ========= All Javascript files linkup ======== -->
     {{-- Custom Script --}}
     {{-- <script src="{{ asset('js/main.js') }}"></script> --}}

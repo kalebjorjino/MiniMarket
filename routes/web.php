@@ -60,12 +60,14 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
     Route::post('/update','update');
     Route::post('/request','requestOrder');
     Route::post('/data','cartData');
+
+    Route::prefix('checkout')->group(function () {
+        Route::get('/', 'checkout'); 
+        Route::get('/order-success/{tracking}', 'orderSuccess');
+    });
 });
 
-Route::controller(CartController::class)->prefix('checkout')->group(function () {
-    // Route::get('/', 'checkout'); // di ata need to? 
-    Route::get('/order-success/{tracking}', 'orderSuccess');
-});
+
 
 
 // Route::get('/shop/shopping-cart', [ProductsController::class, 'cartPage']);
