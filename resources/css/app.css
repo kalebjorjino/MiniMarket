@@ -1578,6 +1578,57 @@ body {
     margin-top: 0.35em;
 }
 
+.checkout-section .order-total.payment-order-sum {
+    box-shadow: none;
+}
+
+.checkout-form .review-info {
+    /* margin-bottom: 64px; */
+    /* margin-bottom: 35px; */
+}
+
+.checkout-form .review-info li {
+    list-style: none;
+    color: #555555;
+    font-size: 16px;
+    font-weight: 400;
+    /* text-transform: uppercase; */
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.checkout-form .review-info li:first-child {
+    padding-top: 0;
+}
+
+.checkout-form .review-info li:last-child {
+    border: none;
+}
+
+.checkout-form .review-info span {
+    font-weight: 900;
+    margin-right: 3rem;
+}
+
+.paypal-btn {
+    width: 100%;
+    background-color: #ffc439;
+    border: none;
+    padding: 0.5rem;
+    color: white;
+    max-width: 600px;
+    text-transform: none;
+    color: #000;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.paypal-btn:before {
+    background: #ffc439;
+}
+
 /* Contact Us Fields */
 
 .comment-form input[type="text"],

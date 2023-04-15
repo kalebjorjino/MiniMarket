@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserOrderRequest;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
-use App\Models\Payment;
+use Omnipay\Omnipay;
 // use App\Models\Paypal;
 // use Omnipay\Omnipay;
 
 
+use App\Models\Payment;
 use Illuminate\Support\Str;
 use App\Models\OrderContact;
 use Illuminate\Http\Request;
@@ -20,6 +22,14 @@ use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
+    // private $gateway;
+
+    public function __construct(){
+        $this->gateway = Omnipay::create('PayPal_Rest');
+        $this->gateway->setClientId(env('PAYPAL_SANDBOX_CLIENT_ID'));
+        $this->gateway->setSecret(env('PAYPAL_SANDBOX_CLIENT_SECRET'));
+        $this->gateway->setTestMode(true);
+    }
     
     public function validation($data, $validate){
         
@@ -251,7 +261,7 @@ class CartController extends Controller
     }
 
     // save order contact
-    public function placeOrder(Request $request){
+    public function placeOrder(UserOrderRequest $request){
         $data = $request->all();
 
         // retrieves all cart item ni customer
@@ -279,7 +289,7 @@ class CartController extends Controller
 
         
         // if((int)$data['id'] > 0){
-            Payment::create([
+            $payment = Payment::create([
                 'user_id' => $data['user_id'],
                 'order_contact_id' => $orderContact->id,
                 // 'product_id' => json_encode($carts_id),
@@ -302,19 +312,150 @@ class CartController extends Controller
 
         // }
 
-        return response()->json([
-            'status' => 200,
-            'hasError' => false,
-            'tracking' => $tracking
+        // return response()->json([
+        //     'status' => 200,
+        //     'hasError' => false,
+        // ]);
+
+         return redirect('/cart/checkout/payment/'.$payment->trackingnumber);
+    }
+
+    // Show payment page
+    public function payment(Request $request, $tracking){
+        // $request->session()->put('trackingnumber', $request->trackingnumber);
+        // dd($tracking);
+
+        $info = Payment::where('trackingnumber',$tracking)->first();
+        $carts = Cart::where('user_id', Auth::user()->id)->where('inPayment', false)->get();
+        return view('customer.cart.payment', [
+            'carts' => $carts,
+            'info' => $info,
         ]);
+    }
+
+
+
+    // Paypal payment redirect
+     public function payOrder(Request $request){
+        // $data = $request->all();
+        $request->session()->put('trackingnumber', $request->trackingnumber);
+        // $request->session()->put('type', $request->order);
+        // $request->session()->put('payment_type', $data["payment-type"]);
+        
+        $amount = 0;
+        $payment = Payment::where('trackingnumber', $request->trackingnumber)->first();
+        $amount =  $payment->total_price;
+     
+
+        try{
+            $response = $this->gateway->purchase(array(
+                'amount' => $amount,
+                'currency' => env('PAYPAL_CURRENCY'),
+                'returnUrl' => url('success'),
+                'cancelUrl' => url('error'),
+            ))->send();
+            
+            if($response->isRedirect()){
+                $response->redirect();
+            }
+            else{
+                return $response->getMessage();
+            }
+        } catch(\Throwable $e){
+            return $e->getMessage();
+        }
+    }
+
+    // Update payment record
+    public function orderPaypal($payment, $paymentID, $userID, $amount_paid){
+        // $tracking = strtoupper(Str::random(10)); //temp
+
+
+        $carts = Cart::where('user_id', $userID)->where('inPayment', false)->get();
+
+        $carts_id = [];
+        foreach($carts as $cart){
+            array_push($carts_id, $cart->id);
+            $cart->inPayment = true;
+            $cart->save();
+        }
+
+        $payment->product_id = json_encode($carts_id);
+
+        $payment->trackingnumberP = $paymentID;
+        $payment->amount_paid = $amount_paid;
+        // $payment->payment_type = $payment_type;
+        $payment->payment_method = '1';
+        $payment->status = "Order placed";
+        // $payment->payment_image_url = $paymentID;
+        $payment->save();
 
     }
 
+
+    // Paypal payment success
+    public function success(Request $request){
+        // $type = $request->session()->pull('type');
+        // $payment_type = $request->session()->pull('payment_type');
+        $tracking = $request->session()->pull('trackingnumber');
+        
+        $data = Payment::where('trackingnumber', $tracking)->first();
+   
+
+        if($data){
+            if($request->input('paymentId') && $request->input('PayerID')){
+
+                $transaction = $this->gateway->completePurchase(array(
+                    'payer_id' => $request->input('PayerID'),
+                    'transactionReference' => $request->input('paymentId'),
+                ));
     
+                $response = $transaction->send();
+    
+                if($response->isSuccessful()){
+                    $arr = $response->getData();
+                    
+                    $paymentID = $response->getTransactionReference();
+                    $amount_paid = $arr['transactions'][0]['amount']['total'];
+                    // $payID = $arr['id'];
+                    
+                    $userID = Auth::user()->id;
+          
+                    $this->orderPaypal($data, $paymentID, $userID, $amount_paid);
 
+                    return redirect('cart/checkout/order-success/'.$tracking);
+           
+                    // return "Payment success";
+                }
+                return "ERROR! Transaction Failed. Error in paypal transaction please try again later.";
+            }
+        }
+        return "ERROR! Transaction Failed. Invalid Tracking Number. Please contact us if error persist!";
+    }
 
+     public function error(Request $request)
+     {
+        
+        // $type = $request->session()->pull('type');
+        // $payment_type = $request->session()->pull('payment_type');
 
-    // order success
+        $tracking = $request->session()->pull('trackingnumber');
+        
+        $info = null;
+
+        $info = Payment::where('trackingnumber', $tracking)->first();
+        $carts = Cart::where('user_id', Auth::user()->id)->where('inPayment', false)->get();
+        return view('customer.cart.payment', [
+            'carts' => $carts,
+            'info' => $info,
+        ]);   
+    }
+
+        
+    
+            
+
+    // Order success
     public function orderSuccess($tracking)
     {
         $payment = Payment::where('trackingnumber', $tracking)->first();

@@ -5,15 +5,11 @@
         <div class="container">
 
             @if ($errors->any())
-                <ul
-                    style="
-                     width: 100%; background-color: rgb(255, 172, 172); border: red solid 1px;
-                     border-radius: 5px; text-center; padding: .75rem;
-                 ">
-                    @foreach ($errors->all() as $error)
-                        <li style="color: red; margin-left: .5rem">{{ $error }}</li>
-                    @endforeach
-                </ul>
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-danger fw-normal" role="alert">
+                        {{ $error }}
+                    </div>
+                @endforeach
             @endif
 
             {{-- <div class="row mb-3">
@@ -34,7 +30,7 @@
             {{-- <form action="/cart/{{ $type }}/payment/{{ $tracking }}" method="POST" class="checkout-form"
                     enctype="multipart/form-data"> --}}
             <div id="payment-box">
-                <form class="checkout-form">
+                <form action="{{ route('placeOrder') }}" method="POST" class="checkout-form">
                     @csrf
                     <div class="row justify-content-between">
                         <div class="col-lg-6">
@@ -240,11 +236,11 @@
 
 @endsection
 @section('script')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('select').niceSelect();
         });
-    </script>
+    </script> --}}
 
     {{-- <script>
         function bindSelectValue(val) {

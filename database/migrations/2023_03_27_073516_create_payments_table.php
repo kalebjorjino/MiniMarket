@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->integer('order_contact_id')->nullable();
+            // $table->unsignedBigInteger('order_contact_id')->nullable();
+            $table->foreignId('order_contact_id')->nullable()->constrained('order_contacts')->onUpdate('cascade')->onDelete('cascade');
             $table->longText("product_id")->nullable();
             $table->string("payment_type")->nullable(); // half, buo
             $table->string("payment_method")->nullable();
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->string("total_price")->nullable();
             $table->string('trackingnumber')->unique();
             $table->string('trackingnumberP')->nullable();
-            $table->string('status')->default('Order Placed');
+            $table->string('status')->default('Unpaid');
             $table->timestamps();
         });
     }

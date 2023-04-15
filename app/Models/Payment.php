@@ -13,6 +13,7 @@ class Payment extends Model
     protected $fillable = [
         "user_id",
         "product_id",
+        "order_contact_id",
         // 'deadline',
         // "schedule_id",
         "payment_type",
@@ -28,5 +29,10 @@ class Payment extends Model
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function orderContact(): HasOne
+    {
+        return $this->hasOne(OrderContact::class, 'id', 'order_contact_id');
     }
 }

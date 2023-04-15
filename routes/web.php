@@ -63,10 +63,15 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
 
     Route::prefix('checkout')->group(function () {
         Route::get('/', 'checkout'); 
+        Route::post('/', 'placeOrder')->name('placeOrder'); 
+        Route::get('/payment/{tracking}', 'payment');
+        Route::post('/payment', 'payOrder')->name('payOrder'); 
         Route::get('/order-success/{tracking}', 'orderSuccess');
     });
 });
 
+Route::get('/success', [CartController::class, 'success']); 
+Route::get('/error', [CartController::class, 'error']); 
 
 
 
