@@ -11,10 +11,11 @@ import { createApp } from "vue";
 // import VueLazyload from "vue-lazyload";
 
 // Vue.use(VueLazyload);
-// import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
-// Vue.use(BootstrapVue)
-// Vue.use(BootstrapVueIcons)
+// import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+// import "bootstrap-vue/dist/bootstrap-vue.css";
+// import "bootstrap/dist/css/bootstrap.css";
+// vue.use(BootstrapVue);
+// Vue.use(BootstrapVueIcons);
 
 /**
  * Next, we will create a fresh Vue application instance. You may then begin
@@ -52,5 +53,5 @@ Object.entries(import.meta.glob("./**/*.vue", { eager: true })).forEach(
  * an "id" attribute of "app". This element is included with the "auth"
  * scaffolding. Otherwise, you will need to add an element yourself.
  */
-
+// app.use(BootstrapVue);
 app.mount("#app");

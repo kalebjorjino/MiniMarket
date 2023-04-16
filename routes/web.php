@@ -112,9 +112,6 @@ Route::prefix('admin')->group(function () {
         Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
 
         // ADMINS
-        // Route::resource('admins', AdminController::class, [
-        //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
-        // ]);
         Route::resource('admins', AdminController::class, [
             'except' => ['create', 'show']
         ]);
@@ -125,15 +122,9 @@ Route::prefix('admin')->group(function () {
         ]);
 
         // ORDERS
-        // Route::resource('orders', OrderController::class, [
-        //     'except' => ['create', 'show']
-        // ]);
         Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders/{tracking}', [OrderController::class, 'show']);
-
-
-        // Route::get('/admin/print', [PrintController::class, 'index']);
-        // Route::get('/admin/print/order/details/{tracking}', [PrintController::class, 'orderDetails']);
+        Route::post('/orders/{payment}', [OrderController::class, 'updateStatus'])->name('orders.update');
 
         // PRODUCTS
         Route::resource('products', ProductController::class, [
@@ -161,6 +152,9 @@ Route::prefix('admin')->group(function () {
         Route::view('about', 'admin.about')->name('about');
 
         // REF
+         // Route::resource('admins', AdminController::class, [
+        //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
+        // ]);
         // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
     });
 
