@@ -14,14 +14,12 @@ class Payment extends Model
         "user_id",
         "product_id",
         "order_contact_id",
-        // 'deadline',
-        // "schedule_id",
-        "payment_type",
+        "payment_type", // remove
         "payment_method",
-        "payment_image_url",
+        "payment_image_url", // remove
         "total_price",
         "amount_paid",
-        "trackingnumber", // ?
+        "trackingnumber", 
         "trackingnumberP",
         "status",
     ];

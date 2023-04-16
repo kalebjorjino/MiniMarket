@@ -63,26 +63,23 @@
                                                     <td class="">{{ date('Y-m-d', strtotime($order->created_at)) }}
                                                     </td>
                                                     <td class=""><span
-                                                            class="badge bg-secondary m-0">{{ $order->status }}</span>
+                                                            class="badge bg-primary m-0">{{ $order->status }}</span>
                                                     </td>
                                                     <td class="">{{ number_format($order->total_price, 2) }}</td>
                                                     <td class="">
-
-                                                        <a href="" class="btn btn-secondary btn-icon me-1 my-2"
+                                                        <a href="{{ route('customer.order', $order->trackingnumber) }}"
+                                                            class="btn btn-secondary btn-icon me-1 my-2"
                                                             data-toggle="tooltip" title="Show">
                                                             <i class="far fa-eye"></i>
                                                         </a>
-
-                                                        {{-- <a href="" class="btn btn-success btn-icon btn-sm mr-1 my-1"
-                                                data-toggle="tooltip" title="Pay">
-                                                <i class="far fa-credit-card"></i>
-                                            </a> --}}
-
-                                                        <a href="" class="btn btn-danger btn-icon my-2"
-                                                            data-toggle="tooltip" title="Cancel">
+                                                        <button class="btn btn-danger btn-icon my-2" data-toggle="tooltip"
+                                                            title="Cancel" @disabled($order->status == 'Completed' || 'Cancelled')>
                                                             <i class="far fa-circle-xmark"></i>
-                                                        </a>
-
+                                                        </button>
+                                                        {{-- <a href="" class="btn btn-success btn-icon btn-sm mr-1 my-1"
+                                                                data-toggle="tooltip" title="Pay">
+                                                                <i class="far fa-credit-card"></i>
+                                                            </a> --}}
                                                     </td>
                                                 </tr>
                                             @endforeach

@@ -26,9 +26,6 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/vue', function() {
-    return view('app');
-});
 
 
 // ============================== public routes ===============================
@@ -51,6 +48,28 @@ Route::controller(MenuController::class)->prefix('menu')->group(function () {
     Route::get('/{product:slug}', 'show');
 });
 
+
+Auth::routes(['verify' => true,]);
+
+// Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+// ============================== customer routes ===============================
+
+// USER DASHBOARD
+Route::middleware('verified')->group(function () {
+
+Route::controller(HomeController::class)->prefix('account')->group(function () {
+    Route::get('/dashboard', 'dashboard');
+    Route::get('/orders', 'orders')->name('customer.orders');
+    Route::get('/orders/{trackingnumber}', 'orderShow')->name('customer.order');
+    Route::get('/profile', 'profile');
+    Route::post('/profile', 'editProfile');
+    Route::get('/change-password', 'changePassword');
+    Route::post('/change-password', 'updateChangePassword');
+});
+Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
+
+
 Route::post('/addtocart', [CartController::class, 'addToCart']);
 
 // CART
@@ -70,41 +89,11 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
     });
 });
 
+// Paypal URL
 Route::get('/success', [CartController::class, 'success']); 
 Route::get('/error', [CartController::class, 'error']); 
 
-
-
-// Route::get('/shop/shopping-cart', [ProductsController::class, 'cartPage']);
-// Route::get('/shop/checkout', [ProductsController::class, 'checkout']);
-// Route::get('/shop/checkout/order-success/{tracking}', [ProductsController::class, 'orderSuccess']);
-// Route::get('/shop/product-detail/{id}', [ProductsController::class, 'productDetail']);
-
-// Route::post('/payment/delete', [ProductsController::class, 'delete']); // ??? 
-// Route::get('/cart/order/checkout/{tracking}', [CartController::class, 'checkoutOrder']);
-// Route::post('/cart/order/payment/{tracking}', [CartController::class, 'paymentOrder']);
-// Route::get('/cart/order/payment/success/{tracking}', [CartController::class, 'paymentOrderSuccess']);
-
-
-
-
-Auth::routes(['verify' => true,]);
-
-// Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-// ============================== customer routes ===============================
-
-// USER DASHBOARD
-Route::controller(HomeController::class)->prefix('account')->middleware('verified')->group(function () {
-    Route::get('/dashboard', 'dashboard');
-    Route::get('/orders', 'orders')->name('customer.orders');
-    Route::get('/profile', 'profile');
-    Route::post('/profile', 'editProfile');
-    Route::get('/change-password', 'changePassword');
-    Route::post('/change-password', 'updateChangePassword');
 });
-Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
-
 // ================================ admin routes ================================
 Route::prefix('admin')->group(function () {
 

@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            // $table->unsignedBigInteger('order_contact_id')->nullable();
             $table->foreignId('order_contact_id')->nullable()->constrained('order_contacts')->onUpdate('cascade')->onDelete('cascade');
             $table->longText("product_id")->nullable();
             $table->string("payment_type")->nullable(); // half, buo

@@ -571,6 +571,10 @@ body {
     color: #2d3292;
 }
 
+.account-side-menu .list-group-item {
+    padding: 0.75rem 1rem;
+}
+
 /*---------------------
   My Orders
 -----------------------*/
@@ -1627,6 +1631,227 @@ body {
 
 .paypal-btn:before {
     background: #ffc439;
+}
+
+/*---------------------
+ Account - Orders View
+-----------------------*/
+
+.order-details-wrap {
+    /* margin-top: 50px; */
+    font-weight: 400;
+}
+
+.order-details-wrap .back-btn {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 1.5rem;
+}
+
+.order-details-wrap .section-title {
+    margin-bottom: 34px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid #ebebeb;
+}
+.order-details-top {
+    margin-bottom: 44px;
+}
+.order-information {
+    display: inline-block;
+}
+.order-information h4 {
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 28px;
+    text-transform: uppercase;
+}
+.order-information .order-information-list li {
+    display: flex;
+    margin-bottom: 9px;
+}
+.order-information .order-information-list li:last-child {
+    margin-bottom: 0;
+}
+.order-information .order-information-list label {
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 165px;
+    margin-bottom: 0;
+    padding-right: 10px;
+}
+.order-information .order-information-list span {
+    color: #6e6e6e;
+    word-break: break-all;
+}
+.order-billing-details h4,
+.order-shipping-details h4 {
+    margin-bottom: 18px;
+}
+.order-billing-details address > span,
+.order-shipping-details address > span {
+    display: block;
+    margin-bottom: 9px;
+    color: #cacac8;
+}
+.order-billing-details address > span:last-child,
+.order-shipping-details address > span:last-child {
+    margin-bottom: 0;
+}
+@media screen and (max-width: 991px) {
+    .order-details-top {
+        margin-bottom: 39px;
+    }
+    .order-information {
+        margin-bottom: 38px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .order-billing-details {
+        margin-bottom: 33px;
+    }
+}
+
+.order-details-middle {
+    margin-bottom: 25px;
+}
+.order-details-middle .table-responsive {
+    border: 1px solid #cacac8;
+    border-radius: 5px;
+}
+.order-details-table tbody td:nth-child(2),
+.order-details-table tbody td:nth-child(4) {
+    /* min-width: 170px; */
+}
+.order-details-table .product-name {
+    display: inline-block;
+    color: #181816;
+}
+.order-details-table .product-name:hover {
+    color: #2e32cd;
+    /* color: var(--color-primary); */
+}
+.order-details-table .product-options {
+    margin: 4px 0 1px;
+}
+.order-details-table .product-price {
+    color: #181816;
+}
+@media screen and (min-width: 881px) {
+    .order-details-table td > label {
+        display: none;
+    }
+}
+@media screen and (max-width: 880px) {
+    .order-details-middle .table-responsive {
+        padding-bottom: 4px;
+    }
+    .order-details-table thead {
+        display: none;
+    }
+    .order-details-table tr:first-child td:nth-child(2),
+    .order-details-table tr:first-child td:nth-child(3),
+    .order-details-table tr:first-child td:nth-child(4) {
+        padding-top: 2px;
+    }
+    .order-details-table tbody td {
+        vertical-align: top;
+        display: block;
+    }
+    .order-details-table tbody td:nth-child(1) {
+        padding: 25px 30px 11px !important;
+    }
+    .order-details-table tbody td:nth-child(2),
+    .order-details-table tbody td:nth-child(3) {
+        padding: 2px 30px;
+        white-space: nowrap;
+    }
+    .order-details-table tbody td:nth-child(4) {
+        padding: 2px 30px 3px;
+        white-space: nowrap;
+    }
+    .order-details-table td > label {
+        width: 90px;
+        min-width: 90px;
+        margin-bottom: 0;
+        padding-right: 5px;
+        color: #6e6e6e;
+        white-space: pre-wrap;
+    }
+    .order-details-table .product-price {
+        display: inline-flex;
+    }
+}
+@media screen and (max-width: 576px) {
+    .order-details-table tbody td:nth-child(1) {
+        padding: 25px 20px 11px !important;
+    }
+    .order-details-table tbody td:nth-child(2),
+    .order-details-table tbody td:nth-child(3) {
+        padding: 2px 20px;
+    }
+    .order-details-table tbody td:nth-child(4) {
+        padding: 2px 20px 3px;
+    }
+}
+
+.order-details-bottom {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+.order-details-bottom .order-summary-list {
+    width: 300px;
+}
+.order-details-bottom .order-summary-list .price-amount {
+    font-weight: 500;
+}
+
+.order-summary-list li {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-bottom: 9px;
+}
+
+.order-summary-total {
+    font-size: 18px;
+    font-weight: 500;
+    display: -webkit-box;
+    display: flex;
+    margin-top: 21px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 14px 0;
+    border-top: 1px solid #ebebeb;
+}
+
+.order-details-bottom .order-summary-total {
+    width: 300px;
+    margin-top: 24px;
+    padding-bottom: 0;
+}
+@media screen and (max-width: 340px) {
+    .order-details-bottom .order-summary-list,
+    .order-details-bottom .order-summary-total {
+        width: 100%;
+    }
+}
+
+/* ORDER TABLE FIX */
+.order-details-table.table tbody tr:first-child > * {
+    padding-top: 0;
+}
+
+.order-details-table.table > :not(caption) > * > * {
+    padding: 10px;
+}
+.order-details-table.table tbody tr > * {
+    border-bottom: 1px solid #ededed;
+}
+.order-details-table.table tbody tr:last-child > * {
+    border-bottom: none;
 }
 
 /* Contact Us Fields */

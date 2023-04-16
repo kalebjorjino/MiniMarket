@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Payment;
 use App\Rules\alpha_spaces;
 use Illuminate\Http\Request;
@@ -71,10 +72,16 @@ class HomeController extends Controller
     //     ]);
     // }
 
-    // public function orderShow()
-    // {
-    //     return view('customer.orders-show');
-    // }
+    public function orderShow($trackingnumber)
+    {
+        $order = Payment::firstWhere('trackingnumber',$trackingnumber);
+
+        $cart_id = json_decode($order->product_id);
+        $carts = Cart::find($cart_id);
+
+        return view('customer.order-show.show', ['order' => $order,  'carts' => $carts]);
+    }
+
 
     // My Profile
     public function profile()
