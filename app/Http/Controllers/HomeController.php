@@ -63,15 +63,6 @@ class HomeController extends Controller
         return view('customer.orders', ['orders' => $orders]);
     }
 
-
-    // public function ordersTrack()
-    // {
-    //     $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
-    //     return view('customer.orders', [
-    //         'orders' => json_encode($orders)
-    //     ]);
-    // }
-
     public function orderShow($trackingnumber)
     {
         $order = Payment::firstWhere('trackingnumber',$trackingnumber);
@@ -80,6 +71,15 @@ class HomeController extends Controller
         $carts = Cart::find($cart_id);
 
         return view('customer.order-show.show', ['order' => $order,  'carts' => $carts]);
+    }
+
+    public function orderCancel($id)
+    {
+        $order = Payment::firstWhere('id',$id);
+        $order->status = "Cancelled";
+        $order->save();
+
+        return response()->json(['status' => 200]); 
     }
 
 

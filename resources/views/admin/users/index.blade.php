@@ -120,7 +120,7 @@
 @endsection
 
 @section('script')
-    // SHOW MODAL IF ERROR
+    {{-- SHOW MODAL IF ERROR --}}
     @if (
         $errors->has('first_name') ||
             $errors->has('last_name') ||
@@ -168,7 +168,7 @@
                         id));
                 }
             });
-        })
+        });
 
         // DELETE  
         var url = window.location.href;
@@ -220,38 +220,39 @@
 
 
         // DATATABLES
-        $(document).ready(function() {
-            $("#table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                buttons: [
-                    // {
-                    //     extend: 'copyHtml5',
-                    //     exportOptions: {
-                    //         columns: 'th:not(:last-child)'
-                    //     }
-                    // },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    }
-                ]
-            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
-        });
+        // $(document).ready(function() {
+        //     $("#table").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         aaSorting: [],
+        //         buttons: [
+        //             // {
+        //             //     extend: 'copyHtml5',
+        //             //     exportOptions: {
+        //             //         columns: 'th:not(:last-child)'
+        //             //     }
+        //             // },
+        //             {
+        //                 extend: 'excelHtml5',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             },
+        //             {
+        //                 extend: 'pdfHtml5',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             },
+        //             {
+        //                 extend: 'print',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             }
+        //         ]
+        //     }).buttons().container().appendTo("#table_wrapper .col-md-6:eq(0)");
+        // });
     </script>
 @endsection

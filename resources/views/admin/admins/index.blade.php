@@ -152,7 +152,7 @@
         $('body').on('click', '.destroy', function(e) {
             e.preventDefault();
             let id = $(this).data('id')
-            console.log(id);
+            // console.log(id);
 
             const swalWithBootstrapButtons = Swal.mixin({
                 customClass: {

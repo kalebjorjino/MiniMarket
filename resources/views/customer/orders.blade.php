@@ -46,7 +46,7 @@
                                 <!-- order table -->
 
                                 <div id="data_table_wrapper" class="order-history table-responsive fw-normal">
-                                    <table id="data_table" class="table table-hover  mb-0">
+                                    <table id="data_table" class="table table-hover mb-0">
                                         <thead>
                                             <tr>
                                                 <th>Order no.</th>
@@ -62,8 +62,9 @@
                                                     <td class="">{{ $order->trackingnumber }}</td>
                                                     <td class="">{{ date('Y-m-d', strtotime($order->created_at)) }}
                                                     </td>
-                                                    <td class=""><span
-                                                            class="badge bg-primary m-0">{{ $order->status }}</span>
+                                                    <td class="">
+                                                        <span
+                                                            class="badge bg-primary @if ($order->status == 'Cancelled') bg-danger @endif  m-0">{{ $order->status }}</span>
                                                     </td>
                                                     <td class="">{{ number_format($order->total_price, 2) }}</td>
                                                     <td class="">
@@ -72,8 +73,9 @@
                                                             data-toggle="tooltip" title="Show">
                                                             <i class="far fa-eye"></i>
                                                         </a>
-                                                        <button class="btn btn-danger btn-icon my-2" data-toggle="tooltip"
-                                                            title="Cancel" @disabled($order->status == 'Completed' || 'Cancelled')>
+                                                        <button class="btn btn-danger btn-icon my-2 cancel"
+                                                            data-id="{{ $order->id }}" data-toggle="tooltip"
+                                                            title="Cancel" @disabled($order->status == 'Completed' || $order->status == 'Cancelled')>
                                                             <i class="far fa-circle-xmark"></i>
                                                         </button>
                                                         {{-- <a href="" class="btn btn-success btn-icon btn-sm mr-1 my-1"
@@ -102,13 +104,13 @@
             $('select').niceSelect();
         });
 
-        $(document).ready(function() {
-            $("#fetchval").on('change', function() {
-                var value = $(this).val();
-                alert(value); //test
-            });
+        // $(document).ready(function() {
+        //     $("#fetchval").on('change', function() {
+        //         var value = $(this).val();
+        //         alert(value); //test
+        //     });
 
-        });
+        // });
 
         // DATATABLES
         $(document).ready(function() {
@@ -117,6 +119,53 @@
                 "lengthChange": false,
                 "autoWidth": false,
                 "aaSorting": [],
+            })
+        });
+
+        var url = window.location.href;
+        $('body').on('click', '.cancel', function(e) {
+
+            e.preventDefault();
+            let id = $(this).data('id')
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success mx-2',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                // confirmButtonColor: "#d33",
+                // cancelButtonColor: "#6C757D", // #3085d6
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post(`${url}/${id}`).then(function(r) {
+                        swalWithBootstrapButtons.fire(
+                            'Cancelled!',
+                            'Order has been cancelled.',
+                            'success'
+                        )
+                    }).then(() => {
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 1000);
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action is cancelled',
+                        'error'
+                    )
+                }
             })
         });
     </script>

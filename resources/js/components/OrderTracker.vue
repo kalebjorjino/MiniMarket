@@ -203,7 +203,7 @@ $(document).ready(function () {
             responsive: true,
             lengthChange: false,
             autoWidth: false,
-            aaSorting: false,
+            aaSorting: [],
             buttons: [
                 {
                     extend: "excelHtml5",

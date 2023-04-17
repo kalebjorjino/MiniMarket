@@ -386,7 +386,7 @@ class CartController extends Controller
         $payment->amount_paid = $amount_paid;
         // $payment->payment_type = $payment_type;
         $payment->payment_method = '1';
-        $payment->status = "Order placed";
+        $payment->status = "Order Placed";
         // $payment->payment_image_url = $paymentID;
         $payment->save();
 

@@ -62,6 +62,7 @@ Route::controller(HomeController::class)->prefix('account')->group(function () {
     Route::get('/dashboard', 'dashboard');
     Route::get('/orders', 'orders')->name('customer.orders');
     Route::get('/orders/{trackingnumber}', 'orderShow')->name('customer.order');
+    Route::post('/orders/{id}', 'orderCancel');
     Route::get('/profile', 'profile');
     Route::post('/profile', 'editProfile');
     Route::get('/change-password', 'changePassword');
