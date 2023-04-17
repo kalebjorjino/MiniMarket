@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\Admin\UserController;
@@ -25,9 +26,6 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/vue', function() {
-    return view('app');
-});
 
 
 // ============================== public routes ===============================
@@ -45,10 +43,11 @@ Route::view('/help', 'storefront.help');
 // MENU
 Route::controller(MenuController::class)->prefix('menu')->group(function () {
     // show all products
-    Route::get('/', [MenuController::class, 'index'])->name('menu.index');
+    Route::get('/', 'index')->name('menu.index');
     // show a product 
-    Route::get('/{product:slug}', [MenuController::class, 'show']);
+    Route::get('/{product:slug}', 'show');
 });
+
 
 Auth::routes(['verify' => true,]);
 
@@ -57,9 +56,12 @@ Auth::routes(['verify' => true,]);
 // ============================== customer routes ===============================
 
 // USER DASHBOARD
-Route::controller(HomeController::class)->prefix('account')->middleware('verified')->group(function () {
+Route::middleware('verified')->group(function () {
+
+Route::controller(HomeController::class)->prefix('account')->group(function () {
     Route::get('/dashboard', 'dashboard');
     Route::get('/orders', 'orders')->name('customer.orders');
+    Route::get('/orders/{trackingnumber}', 'orderShow')->name('customer.order');
     Route::get('/profile', 'profile');
     Route::post('/profile', 'editProfile');
     Route::get('/change-password', 'changePassword');
@@ -67,6 +69,31 @@ Route::controller(HomeController::class)->prefix('account')->middleware('verifie
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
 
+
+Route::post('/addtocart', [CartController::class, 'addToCart']);
+
+// CART
+Route::controller(CartController::class)->prefix('cart')->group(function () {
+    Route::get('/','cartPage'); // cart
+    Route::post('/delete','delete');
+    Route::post('/update','update');
+    Route::post('/request','requestOrder');
+    Route::post('/data','cartData');
+
+    Route::prefix('checkout')->group(function () {
+        Route::get('/', 'checkout'); 
+        Route::post('/', 'placeOrder')->name('placeOrder'); 
+        Route::get('/payment/{tracking}', 'payment');
+        Route::post('/payment', 'payOrder')->name('payOrder'); 
+        Route::get('/order-success/{tracking}', 'orderSuccess');
+    });
+});
+
+// Paypal URL
+Route::get('/success', [CartController::class, 'success']); 
+Route::get('/error', [CartController::class, 'error']); 
+
+});
 // ================================ admin routes ================================
 Route::prefix('admin')->group(function () {
 
@@ -85,9 +112,6 @@ Route::prefix('admin')->group(function () {
         Route::put('profile', [AdminProfile::class, 'update'])->name('profile.update');
 
         // ADMINS
-        // Route::resource('admins', AdminController::class, [
-        //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
-        // ]);
         Route::resource('admins', AdminController::class, [
             'except' => ['create', 'show']
         ]);
@@ -98,9 +122,9 @@ Route::prefix('admin')->group(function () {
         ]);
 
         // ORDERS
-        Route::resource('orders', OrderController::class, [
-            'except' => ['create', 'show']
-        ]);
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/{tracking}', [OrderController::class, 'show']);
+        Route::post('/orders/{payment}', [OrderController::class, 'updateStatus'])->name('orders.update');
 
         // PRODUCTS
         Route::resource('products', ProductController::class, [
@@ -128,6 +152,9 @@ Route::prefix('admin')->group(function () {
         Route::view('about', 'admin.about')->name('about');
 
         // REF
+         // Route::resource('admins', AdminController::class, [
+        //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
+        // ]);
         // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
     });
 

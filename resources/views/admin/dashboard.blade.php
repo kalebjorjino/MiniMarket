@@ -36,8 +36,8 @@
                     <i class="lni lni-cart-full"></i>
                 </div>
                 <div class="content">
-                    <h6 class="mb-10">New Orders</h6>
-                    <h3 class="text-bold mb-10">34567</h3>
+                    <h6 class="mb-10">Active Products</h6>
+                    <h3 class="text-bold mb-10">{{ $active }}</h3>
 
                 </div>
             </div>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="content">
                     <h6 class="mb-10">Total Income</h6>
-                    <h3 class="text-bold mb-10">₱74,567</h3>
+                    <h3 class="text-bold mb-10">₱{{ $income }}</h3>
 
                 </div>
             </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="content">
                     <h6 class="mb-10">Total Expense</h6>
-                    <h3 class="text-bold mb-10">₱24,567</h3>
+                    <h3 class="text-bold mb-10">₱{{ $expenses }}</h3>
 
                 </div>
             </div>
@@ -78,8 +78,8 @@
                     <i class="lni lni-user"></i>
                 </div>
                 <div class="content">
-                    <h6 class="mb-10">New Customers</h6>
-                    <h3 class="text-bold mb-10">34567</h3>
+                    <h6 class="mb-10">Verified Customers</h6>
+                    <h3 class="text-bold mb-10">{{ $users }}</h3>
 
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <div class="left">
                         <h6 class="text-medium mb-30">Top Selling Products</h6>
                     </div>
-                    <div class="right">
+                    {{-- <div class="right">
                         <div class="select-style-1">
                             <div class="select-position select-sm">
                                 <select class="light-bg">
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <!-- end select -->
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- End Title -->
                 <div class="table-responsive">
@@ -249,7 +249,7 @@
                     <div class="left">
                         <h6 class="text-medium mb-30">Sales/Revenue</h6>
                     </div>
-                    <div class="right">
+                    {{-- <div class="right">
                         <div class="select-style-1">
                             <div class="select-position select-sm">
                                 <select class="light-bg">
@@ -260,7 +260,7 @@
                             </div>
                         </div>
                         <!-- end select -->
-                    </div>
+                    </div> --}}
                 </div>
                 <!-- End Title -->
                 <div class="chart">
@@ -279,6 +279,47 @@
                 {{-- Stock Alert --}}
                 <div class="left">
                     <h6 class="text-medium mb-30">Stock Alerts</h6>
+                    <div class="table-responsive">
+
+                    <table id="inventory" class="table top-selling-table" style="min-height: 250px">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h6 class="text-sm text-medium">ID</h6>
+                                </th>
+                                <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                        Product
+                                    </h6>
+                                </th>
+                                <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                        Stocks
+                                    </h6>
+                                </th>
+                                <th class="min-width">
+                                    <h6 class="text-sm text-medium">
+                                        Alert Quantity
+                                    </h6>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($items as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->product->title }}</td>
+                                    @if ($item->stocks <= $item->alert_quantity)
+                                        <td class="bg-danger">{{ $item->stocks }}</td>
+                                    @else
+                                        <td>{{ $item->stocks }}</td>
+                                    @endif
+                                    <td>{{ $item->alert_quantity }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -438,6 +479,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.js"></script>
 
     <script>
+          $(function() {
+            $("#inventory").DataTable({
+                "aaSorting": [ ], // Prevent initial sorting
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "pageLength": 5,
+                "searching": false,
+            })
+        });
+
         // =========== chart two start (sales/revenue)
         const ctx2 = document.getElementById("Chart2").getContext("2d");
         const chart2 = new Chart(ctx2, {

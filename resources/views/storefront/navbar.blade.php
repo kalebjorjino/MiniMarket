@@ -13,11 +13,11 @@
             <div class="top-nav-items d-flex justify-content-between align-items-center my-2">
                 @auth
                     <?php
-                    // $cart_item_count = DB::table('carts')
-                    //     ->where('user_id', Auth::user()->id)
-                    //     ->where('inPayment', false)
-                    //     ->count();
-                    $cart_item_count = 0;
+                    $cart_item_count = DB::table('carts')
+                        ->where('user_id', Auth::user()->id)
+                        ->where('inPayment', false)
+                        ->count();
+                    // $cart_item_count = 0;
                     ?>
 
                     <div class="d-flex flex-column align-self-center mx-3 my-2">
