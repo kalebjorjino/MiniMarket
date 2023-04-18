@@ -26,6 +26,7 @@ class UserCreateRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255', new alpha_spaces],
             'last_name' => ['required', 'string', 'max:255', new alpha_spaces],
             'phone_number' => ['required', 'numeric', 'digits:11'],
+            'address' => ['required', 'string',  'max:255'],
             'email' => ['required', 'email', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
         ];

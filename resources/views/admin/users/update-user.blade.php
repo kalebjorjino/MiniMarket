@@ -64,6 +64,23 @@
                     </div>
 
                     <div class="form-group row mb-3">
+                        <label for="e_address" class="col-sm-3 col-form-label">Address <span
+                                class="text-danger">*</span> </label>
+                        <div class="col-sm-9">
+
+                            <input id="e_address" type="text"
+                                class="form-control @error('e_address') is-invalid @enderror" name="e_address"
+                                value="{{ old('e_address') }}">
+
+                            @error('e_address')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
                         <label for="e_email" class="col-sm-3 col-form-label">Email Address <span
                                 class="text-danger">*</span>
                         </label>

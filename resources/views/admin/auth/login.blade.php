@@ -52,7 +52,7 @@
                                 <label for="email">{{ __('Email') }}</label>
                                 <input @error('email') class="form-control is-invalid" @enderror type="email"
                                     name="email" id="email" placeholder="{{ __('Email') }}" required
-                                    autocomplete="email" autofocus>
+                                    autocomplete="email" value="admin@admin.com" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,8 +65,8 @@
                             <div class="input-style-1">
                                 <label for="password">{{ __('Password') }}</label>
                                 <input type="password" @error('password') class="form-control is-invalid" @enderror
-                                    name="password" id="password" placeholder="{{ __('Password') }}" required
-                                    autocomplete="current-password">
+                                    name="password" id="password" placeholder="{{ __('Password') }}" value="123"
+                                    required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -75,14 +75,14 @@
                             </div>
                         </div>
                         <!-- end col -->
-                        <div class="col-xxl-6 col-lg-12 col-md-6">
+                        {{-- <div class="col-xxl-6 col-lg-12 col-md-6">
                             <div class="form-check checkbox-style mb-30">
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     value="" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="form-check-label" for="remember">
                                     {{ __('Remember Me') }}</label>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- end col -->
                         <div class="col-12">
                             <div class="button-group d-flex justify-content-center flex-wrap">

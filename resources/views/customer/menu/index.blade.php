@@ -1,14 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- just a code draft dump --}}
-    <div>
-        @unless(count($products) == 0)
-            @foreach ($products as $product)
-                <x-product-card :product="$product">
-            @endforeach
-        @else
-            <p>No products found</p>
-        @endunless
+    <div class="bg-white">
+        <div class="container my-5">
+            <shop-products product-datas="{{ $products }}"></shop-products>
+        </div>
     </div>
 @endsection

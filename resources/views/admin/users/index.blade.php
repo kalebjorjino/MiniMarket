@@ -120,8 +120,13 @@
 @endsection
 
 @section('script')
-    // SHOW MODAL IF ERROR
-    @if ($errors->has('first_name') || $errors->has('last_name') || $errors->has('email') || $errors->has('password'))
+    {{-- SHOW MODAL IF ERROR --}}
+    @if (
+        $errors->has('first_name') ||
+            $errors->has('last_name') ||
+            $errors->has('address') ||
+            $errors->has('email') ||
+            $errors->has('password'))
         <script>
             $(document).ready(function() {
                 $('#createModal').modal('show');
@@ -129,7 +134,12 @@
         </script>
     @endif
 
-    @if ($errors->has('e_first_name') || $errors->has('e_last_name') || $errors->has('e_email') || $errors->has('e_pass'))
+    @if (
+        $errors->has('e_first_name') ||
+            $errors->has('e_last_name') ||
+            $errors->has('e_address') ||
+            $errors->has('e_email') ||
+            $errors->has('e_pass'))
         <script>
             $(document).ready(function() {
                 $('#editModal').modal('show');
@@ -152,12 +162,13 @@
                     $('#e_first_name').val(data.first_name);
                     $('#e_last_name').val(data.last_name);
                     $('#e_phone_number').val(data.phone);
+                    $('#e_address').val(data.address);
                     $('#e_email').val(data.email);
                     $('#edit-form').attr('action', "{{ route('users.update', ':id') }}".replace(':id',
                         id));
                 }
             });
-        })
+        });
 
         // DELETE  
         var url = window.location.href;
@@ -209,38 +220,39 @@
 
 
         // DATATABLES
-        $(document).ready(function() {
-            $("#table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                buttons: [
-                    // {
-                    //     extend: 'copyHtml5',
-                    //     exportOptions: {
-                    //         columns: 'th:not(:last-child)'
-                    //     }
-                    // },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    }
-                ]
-            }).buttons().container().appendTo('#table_wrapper .col-md-6:eq(0)');
-        });
+        // $(document).ready(function() {
+        //     $("#table").DataTable({
+        //         "responsive": true,
+        //         "lengthChange": false,
+        //         "autoWidth": false,
+        //         aaSorting: [],
+        //         buttons: [
+        //             // {
+        //             //     extend: 'copyHtml5',
+        //             //     exportOptions: {
+        //             //         columns: 'th:not(:last-child)'
+        //             //     }
+        //             // },
+        //             {
+        //                 extend: 'excelHtml5',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             },
+        //             {
+        //                 extend: 'pdfHtml5',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             },
+        //             {
+        //                 extend: 'print',
+        //                 exportOptions: {
+        //                     columns: 'th:not(:last-child)'
+        //                 }
+        //             }
+        //         ]
+        //     }).buttons().container().appendTo("#table_wrapper .col-md-6:eq(0)");
+        // });
     </script>
 @endsection

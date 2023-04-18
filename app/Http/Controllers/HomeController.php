@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Payment;
 use App\Rules\alpha_spaces;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -51,9 +53,35 @@ class HomeController extends Controller
         // $orders = DB::table('carts')->where(['user_id' => $id, 'inPayment' => 1])
         // ->count();
         
-            return view('customer.dashboard', ['user' => $user]
-       );
+        return view('customer.dashboard', ['user' => $user]);
     }
+
+    // Order Tracker
+    public function orders()
+    {
+        $orders = Payment::where('user_id', Auth::user()->id)->where('product_id', '!=', null)->orderBy('created_at', 'desc')->get();
+        return view('customer.orders', ['orders' => $orders]);
+    }
+
+    public function orderShow($trackingnumber)
+    {
+        $order = Payment::firstWhere('trackingnumber',$trackingnumber);
+
+        $cart_id = json_decode($order->product_id);
+        $carts = Cart::find($cart_id);
+
+        return view('customer.order-show.show', ['order' => $order,  'carts' => $carts]);
+    }
+
+    public function orderCancel($id)
+    {
+        $order = Payment::firstWhere('id',$id);
+        $order->status = "Cancelled";
+        $order->save();
+
+        return response()->json(['status' => 200]); 
+    }
+
 
     // My Profile
     public function profile()
@@ -64,25 +92,25 @@ class HomeController extends Controller
         return view('customer.profile', ['user' => $user]);
     }
 
-    public function editProfile(Request $request){
-
+    public function editProfile(Request $request)
+    {
         $request->validate([
             'first_name' => ['required', 'max:255', new alpha_spaces],
             'last_name' => ['required', 'max:255', new alpha_spaces],
             'phone' => ['required', 'numeric', 'digits:11'],
+            'address' => ['required', 'string',  'max:255'],
         ]);
 
-        $test = DB::table('users')
-        ->where('email', $request->email)
-        ->update([
+        DB::table('users')->where('email', $request->email)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'phone_number' => $request->phone_number,
+            'phone' => $request->phone,
+            'address' => $request->address,
         ]);
-        return redirect('/profile')->with('success', "Your profile has been successfully updated!");
+
+        return redirect('/account/profile')->with('success', "Your profile has been successfully updated!");
     }
 
-    // 
     public function changePassword()
     {
         return view('customer.changePassword');
@@ -92,6 +120,9 @@ class HomeController extends Controller
 
          $request->validate([
             'current_password' => 'required',
+            'new_password' => 'required',
+            'new_password_confirmation' => 'required',
+
          ]);
      
         $user = DB::table('users')
@@ -99,11 +130,11 @@ class HomeController extends Controller
             ->get();
 
         if (!(Hash::check($request->current_password, $user[0]->password))) {   
-            return redirect('/changePassword')->with('error', "Your current password does not matches with the password you provided. Please try again.");
+            return redirect('/account/change-password')->with('error', "Your current password does not matches with the password you provided. Please try again.");
 
         } 
         elseif(strcmp($request->current_password, $request->new_password) == 0){
-            return redirect('/changePassword')->with("error","New Password cannot be same as your current password. Please choose a different password.");
+            return redirect('/account/change-password')->with("error","New Password cannot be same as your current password. Please choose a different password.");
         } 
         else {
             $request->validate([
@@ -120,7 +151,7 @@ class HomeController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
         
-        return redirect('/changePassword')->with('success', 'Your password has been changed successfully!');
+        return redirect('/account/change-password')->with('success', 'Your password has been changed successfully!');
     
     }
 }
