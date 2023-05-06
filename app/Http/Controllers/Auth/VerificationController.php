@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class VerificationController extends Controller
 {
@@ -19,7 +25,10 @@ class VerificationController extends Controller
     |
     */
 
-    use VerifiesEmails;
+    // use VerifiesEmails;
+    use VerifiesEmails {
+        verify as parentVerify;
+    }
 
     /**
      * Where to redirect users after verification.
@@ -35,8 +44,21 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
+        $this->middleware('auth')->except('verify');
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
+    }
+
+    public function verify(Request $request)
+    {
+        $user = User::find($request->route('id'));
+        if (!$user) return abort(404);
+
+        $request->setUserResolver(function () use($user) {
+            return $user;
+        });
+
+        return $this->parentVerify($request);
     }
 }

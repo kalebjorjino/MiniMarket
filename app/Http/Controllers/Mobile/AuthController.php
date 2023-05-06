@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
 
-    
     // Login
     public function login(Request $request)
     {
@@ -26,7 +25,7 @@ class AuthController extends Controller
             if ($user->email == $request->email && Hash::check($request->password, $user->password)) {
                 return response(['message' => 'success', 'data' => $user]);
             } else {
-                return response(['message' => 'asdad']);
+                return response(['message' => 'error']);
             }
         }
     }
@@ -35,49 +34,29 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'password' => 'required|string|min:8',
-            'address' => 'required|string|max:255',
-            'phone' => 'required|string|min:11',
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'numeric'],
+            'address' => ['required', 'string',  'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string'],
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
 
-        $user = new User([
-            'name' => $request->name,
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address,
         ]);
 
-        $user->save();
+        event(new Registered($user));
 
-        $token = $user->createToken('MyApp')->accessToken;
-
-        return response()->json(['token' => $token], 201);
+        return response()->json(['message' => 'success'], 201);
     }
-
-    // public function login(Request $request)
-    // {
-    //     $exist = DB::table('users')
-    //         ->where('email', $request->email)
-    //         ->count();
-
-    //     if ($exist == 0) {
-    //         return "error";
-    //     } else {
-    //         $user = DB::table('users')
-    //             ->where('email', $request->email)
-    //             ->get();
-    //         if ($user[0]->email == $request->email && Hash::check($request->password, $user[0]->password)) {
-    //             return response(['message' => 'success', 'data' => $user]);
-    //         } else {
-    //             return response(['message' => 'error']);
-    //         }
-    //     }
-    // }
 }

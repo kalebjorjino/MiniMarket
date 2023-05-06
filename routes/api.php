@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\AuthController;
+use App\Http\Controllers\Mobile\VerificationController;
 
 
 /*
