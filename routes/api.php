@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mobile\AuthController;
-use App\Http\Controllers\Mobile\VerificationController;
+use App\Http\Controllers\Mobile\ProfileController;
 
 
 /*
@@ -17,14 +17,20 @@ use App\Http\Controllers\Mobile\VerificationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 // Auth + Profile 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
     Route::post('/signup','signup');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::post('/profile','editProfile');
+    Route::post('/profile-password', 'editPassword');
+    Route::post('/get-profile', 'getProfile');
 });
 
