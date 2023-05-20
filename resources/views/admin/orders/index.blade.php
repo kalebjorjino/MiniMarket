@@ -34,42 +34,8 @@
     <div class="card-styles">
         <div class="card-style-3 mb-30">
             <div class="card-content">
-                {{-- <admin-order-table paymentsdata="{{ $payments }}" user="admin"></admin-order-table> --}}
                 <order-tracker paymentsdata="{{ $payments }}" user="admin"></order-tracker>
             </div>
         </div>
     </div>
 @endsection
-
-{{-- 
-@section('script')
-    <script>
-        // DATATABLES
-        $(document).ready(function() {
-            $("#data_table").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                buttons: [{
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: 'th:not(:last-child)'
-                        }
-                    }
-                ]
-            }).buttons().container().appendTo('#data_table_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-@endsection --}}

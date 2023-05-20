@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\ProfileController as AdminProfile;
 
 
 // ============================== public routes ===============================
+
 Route::controller(StorefrontController::class)->group(function(){
     Route::get('/', 'index'); // home
     Route::get('/contact-us', 'contact')->name('contact.show');
@@ -42,16 +43,12 @@ Route::view('/help', 'storefront.help');
 
 // MENU
 Route::controller(MenuController::class)->prefix('menu')->group(function () {
-    // show all products
-    Route::get('/', 'index')->name('menu.index');
-    // show a product 
-    Route::get('/{product:slug}', 'show');
+    Route::get('/', 'index')->name('menu.index');  // show all products
+    // Route::get('/{product:slug}', 'show');     // show a product 
 });
 
 
 Auth::routes(['verify' => true,]);
-
-// Route::post('/email/verification-notification', [HomeController::class, 'emailNotif'])->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // ============================== customer routes ===============================
 
@@ -70,12 +67,15 @@ Route::controller(HomeController::class)->prefix('account')->group(function () {
 });
 Route::post('userLogout', [HomeController::class, 'logout'])->name('userLogout');
 
+// PRODUCT DETAIL
+Route::get('/menu/{product:slug}', [MenuController::class, 'show']);
 
+// ADD TO CART 
 Route::post('/addtocart', [CartController::class, 'addToCart']);
 
 // CART
 Route::controller(CartController::class)->prefix('cart')->group(function () {
-    Route::get('/','cartPage'); // cart
+    Route::get('/','cartPage'); 
     Route::post('/delete','delete');
     Route::post('/update','update');
     Route::post('/request','requestOrder');
@@ -90,7 +90,7 @@ Route::controller(CartController::class)->prefix('cart')->group(function () {
     });
 });
 
-// Paypal URL
+// PAYPAL URL
 Route::get('/success', [CartController::class, 'success']); 
 Route::get('/error', [CartController::class, 'error']); 
 
@@ -149,15 +149,13 @@ Route::prefix('admin')->group(function () {
         ]);
         Route::get('getProduct', [ExpenseController::class, 'getProduct'])->name('getProduct');
 
+    });
+});
 
-        Route::view('about', 'admin.about')->name('about');
+ // REF
+        // Route::view('about', 'admin.about')->name('about');
 
-        // REF
-         // Route::resource('admins', AdminController::class, [
+        // Route::resource('admins', AdminController::class, [
         //     'only' => ['index', 'store', 'edit', 'update', 'destroy']
         // ]);
         // Route::get('/dashboard', 'Admin\DashboardController@index')->name('adminDashboard');
-    });
-
-});
-

@@ -20,14 +20,16 @@
                   <h3>SAMJ KMART</h3>
                   <ul class="list-unstyled links">
                       <li><a href="/menu">Menu</a></li>
-                      <li><a href="/menu/categories">Categories</a></li>
-                      <li><a href="/menu/brands">Brands</a></li>
+                      {{-- <li><a href="/menu/categories">Categories</a></li> --}}
+                      <li><a href="javascript:void(0)">Categories</a></li>
+                      {{-- <li><a href="/menu/brands">Brands</a></li> --}}
+                      <li><a href="javascript:void(0)">Brands</a></li>
                   </ul>
               </div>
               <div class="col-md-2 ml-auto">
                   <h3>RESOURCES</h3>
                   <ul class="list-unstyled links">
-                      <li><a href="/about-us">About</a></li>
+                      <li><a href="/about">About</a></li>
                       <li><a href="/contact-us">Contact Us</a></li>
                       <li><a href="/account/dashboard">Account</a></li>
                       {{-- <li><a href="#">FAQs</a></li> --}}
