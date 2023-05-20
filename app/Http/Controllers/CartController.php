@@ -169,20 +169,20 @@ class CartController extends Controller
                 'trackingnumber' => $tracking,
             ]);
         }
-        else{
-            // pang mobile customers maybe?
-            $payment = Payment::create([
-                'user_id' => $data['id'],
-                'product_id' => json_encode($carts_id),
-                'total_price' => $data['total'],
-                // 'deadline' =>  now(),
-                'trackingnumber' => $tracking,
-                'status' => 'In Process',
-                'amount_paid' => $data['total'],
-                'payment_method' => 'COD',
-            ]);
+        // else{
+        //     // pang mobile customers maybe?
+        //     $payment = Payment::create([
+        //         'user_id' => $data['id'],
+        //         'product_id' => json_encode($carts_id),
+        //         'total_price' => $data['total'],
+        //         // 'deadline' =>  now(),
+        //         'trackingnumber' => $tracking,
+        //         'status' => 'In Process',
+        //         'amount_paid' => $data['total'],
+        //         'payment_method' => 'COD',
+        //     ]);
 
-        }
+        // }
 
         return response()->json([
             'status' => 200,
@@ -269,7 +269,7 @@ class CartController extends Controller
 
         // $carts_id = [];
 
-        $tracking = Carbon::now()->format('Y') . random_int(10000, 99999); //temp
+        $tracking = Carbon::now()->format('Y') . random_int(10000, 99999); 
 
         // will update these cart items into inPayment meaning nacheckout na sila 
         // foreach($carts as $cart){
@@ -433,8 +433,8 @@ class CartController extends Controller
         return "ERROR! Transaction Failed. Invalid Tracking Number. Please contact us if error persist!";
     }
 
-     public function error(Request $request)
-     {
+    public function error(Request $request)
+    {
         
         // $type = $request->session()->pull('type');
         // $payment_type = $request->session()->pull('payment_type');
@@ -451,9 +451,6 @@ class CartController extends Controller
         ]);   
     }
 
-        
-    
-            
 
     // Order success
     public function orderSuccess($tracking)
@@ -468,7 +465,4 @@ class CartController extends Controller
             'carts' => $carts,
         ]);
     }
-
-
-
 }
