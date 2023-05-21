@@ -84,8 +84,7 @@
                                         </div>
 
                                         <div class="form-group col-md-6 mb-2">
-                                            <label for="brand" class="col-form-label">Brand <span
-                                                    class="text-danger">*</span>
+                                            <label for="brand" class="col-form-label">Brand
                                             </label>
 
                                             <select name="brand" id="brand"

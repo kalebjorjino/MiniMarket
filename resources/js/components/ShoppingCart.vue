@@ -178,7 +178,7 @@
 
                     <!-- <button :disabled="isLoading || !canUpdate" @click="requestOrder()" class="proceed-btn mt-2">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button> -->
 
-                    <button :disabled="isLoading || !canUpdate" @click="proceedCheckout()" class="proceed-btn mt-2">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button>
+                    <button :disabled="isLoading || !canUpdate || total == 0" @click="proceedCheckout()" class="proceed-btn mt-2">PROCEED TO CHECK OUT<i v-if="isLoading" class="fa-solid fa-circle-notch fa-spin ml-2"></i></button>
                 </div>
             </div>
         </div>

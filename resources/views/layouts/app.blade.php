@@ -26,14 +26,10 @@
 
     <!-- Datatables -->
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/r-2.4.1/datatables.min.css" rel="stylesheet" />
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.css" rel="stylesheet">
 
-
     <!-- CSS Sheet -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/css/app.css']) --}}
     @vite(['resources/sass/app.scss', 'resources/css/app.css'])
-
 
 </head>
 
@@ -51,8 +47,9 @@
     <!-- ========= All Javascript files linkup ======== -->
     {{-- Custom Script --}}
     {{-- <script src="{{ asset('js/main.js') }}"></script> --}}
+    {{-- @vite(['resources/js/app.js', 'resources/js/script.js']) --}}
 
-    @vite(['resources/js/app.js', 'resources/js/script.js'])
+    @vite(['resources/js/app.js'])
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/r-2.4.1/datatables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
