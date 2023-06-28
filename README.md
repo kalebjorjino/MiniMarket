@@ -1,5 +1,10 @@
 # SAM-J KMART ECOMMERCE WEB APP
 
+|          |  |
+:-------------------------:|:-------------------------:
+![sign-up](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/18ec3db8-b6eb-4330-9e3d-81ace08afb69) |  ![our-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/edd9ce02-2761-4477-ba56-03f04aced47f)
+![admin-dashboard](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/c3292017-c59c-4a08-8103-efcb4267b69f) | ![admin-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/ac030c14-fe3c-40d6-92a3-515c0287be49)
+
 ## Prerequisites
 
 Before running this project, ensure that you have the following prerequisites installed on your system:
@@ -37,5 +42,5 @@ php artisan serve
 
 ## License
 
-This project is licensed under the MIT License. Feel free to use and modify the code as per your requirements.
+This project is licensed under the GNU General Public License v3.0.
 
