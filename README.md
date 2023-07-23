@@ -1,9 +1,11 @@
 # SAM-J KMART ECOMMERCE WEB APP
+A web app for a korean mart business using laravel, bootstrap, vue.js, and paypal api.
 
-|          |  |
+|   Storefront       | Admin |
 :-------------------------:|:-------------------------:
-![sign-up](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/18ec3db8-b6eb-4330-9e3d-81ace08afb69) |  ![our-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/edd9ce02-2761-4477-ba56-03f04aced47f)
-![admin-dashboard](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/c3292017-c59c-4a08-8103-efcb4267b69f) | ![admin-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/ac030c14-fe3c-40d6-92a3-515c0287be49)
+![sign-up](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/ee13396e-31d7-4e2c-a93d-139b7ee7412f) | ![admin-dashboard](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/f26b86ab-fc96-46dc-ae3a-009f400aada7)
+![our-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/df26f8eb-493a-4d93-9877-2df1d3167797) | ![admin-products](https://github.com/aleaxim/samj-ecommerce-web/assets/56270967/cf02ff4c-ea5f-4651-9e6b-75da1d052013)
+
 
 ## Prerequisites
 
