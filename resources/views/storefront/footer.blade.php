@@ -14,10 +14,10 @@
               <div class="col-md-5">
                   <a href="/" class="footer-site-logo"><img src="{{ asset('images/logo/samj-logo.png') }}"
                           width="200"></a>
-                  <p>When Korean tradition meeets modern convenience.</p>
+                  <p>Lorem ipsum dolor sit amet consectetur, ..</p>
               </div>
               <div class="col-md-2 ml-auto">
-                  <h3>SAMJ KMART</h3>
+                  <h3>2023 SMART</h3>
                   <ul class="list-unstyled links">
                       <li><a href="/menu">Menu</a></li>
                       {{-- <li><a href="/menu/categories">Categories</a></li> --}}
@@ -45,7 +45,7 @@
 
           <div class="row d-flex justify-content-between py-3 border-top">
               <div class="col">
-                  <p class="mt-2">&copy; 2023 SAMJ Korean Mini Mart. All rights reserved.</p>
+                  <p class="mt-2">&copy; 2023 Lorem ipsum, dolor sit amet consectetu.</p>
                   {{-- <ul class="list-unstyled link-menu nav-left">
             </ul> --}}
               </div>

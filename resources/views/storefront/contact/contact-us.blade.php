@@ -41,7 +41,7 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-content">
-                                <p>Purok 1, San Isidro, Hagonoy, 3002 Bulacan</p>
+                                <p>Peru 1, Lima, Peru, 3002</p>
                             </div><!-- /.box-content -->
                         </div><!-- /.iconbox -->
                     </div><!-- /.col-md-4 -->
@@ -54,7 +54,7 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-content">
-                                <p>+639 50 682 4146 / 09190078517</p>
+                                <p>+51 985827395 / 958929925</p>
                             </div><!-- /.box-content -->
                         </div><!-- /.iconbox -->
                     </div><!-- /.col-md-4 -->
@@ -67,7 +67,7 @@
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-content">
-                                <p>no-reply@met4-digital.tech</p>
+                                <p>20159238si@gmail.com</p>
                             </div><!-- /.box-content -->
                         </div><!-- /.iconbox -->
                     </div><!-- /.col-md-4 -->
@@ -76,10 +76,7 @@
                 <div class="row">
                     <div class="col-md-12 my-3">
                         <div class="flat-map ">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3856.425102262796!2d120.72973541744385!3d14.857489300000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339651ca93f61871%3A0x7c1d0a6295a834c3!2sSAMJ%20Korean%20Mini-Mart!5e0!3m2!1sen!2sph!4v1680454303934!5m2!1sen!2sph"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                           
                         </div>
                     </div><!-- /.col-md-12 -->
                 </div><!-- /.row -->
